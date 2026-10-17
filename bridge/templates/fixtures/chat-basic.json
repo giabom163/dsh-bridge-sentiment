@@ -1,0 +1,16 @@
+{
+ "name": "chat-basic",
+ "sig": "dea4dea952148408",
+ "recorded_at": "2026-10-17T04:49:43.391580+00:00",
+ "request": {
+  "model": "deepseek-v4.1-flash",
+  "messages": [
+   {
+    "role": "user",
+    "content": "只输出一个 JSON：{\"ok\":true}"
+   }
+  ]
+ },
+ "http_status": 200,
+ "response_raw": "{\"id\":\"021792212581464378c141953f92ec627da9d675fe03be070bf94\",\"object\":\"chat.completion\",\"created\":1792212581,\"model\":\"deepseek-v4.1-flash\",\"choices\":[{\"index\":0,\"finish_reason\":\"stop\",\"logprobs\":null,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"ok\\\":true}\"}}],\"usage\":{\"prompt_tokens\":14,\"completion_tokens\":5,\"total_tokens\":19,\"prompt_tokens_details\":{\"cached_tokens\":0},\"completion_tokens_details\":{\"reasoning_tokens\":0}}}"
+}

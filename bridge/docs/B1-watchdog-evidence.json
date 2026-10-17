@@ -1,0 +1,191 @@
+{
+  "at": "2026-10-15T13:32:28.120344+00:00",
+  "runtime": {
+    "pid": 23508,
+    "started_at": "2026-10-15T13:31:33.985148+00:00",
+    "store": "C:\\Users\\Lenovo\\Documents\\Codex\\bridge-work\\data",
+    "loaded_sha256": {
+      "bridge": "94f03496f8584208fc4ad110238c4e59f60acfc7f2310fa0e576a04c2d9dac96",
+      "adapters": "86cd5732a66724cb8ad9ff734d4f5d67212676a5f78c24cd8a2e327726d38fce",
+      "webui.py": "c92657e9095f7293201acdb29eeab5a06a323c0666429ce8ba2efc145baac991",
+      "web/app.js": "5c39b3ad3b020e09a9da0f7ac5940c8de1175106ccf78c21bd4adb0bca38a2c1",
+      "web/index.html": "42dd74918382a118049f21e4ea5a3a27ca66f2a7e60c06c5f01380f9d83fb5c9",
+      "web/style.css": "f58fede9628baeb24df87a0c1119f675fe6b45a6be2c3fb991fdc869ce4f1463",
+      "web/task-graph.js": "af2e04da8aca31631cc21491b2118142b51440d099bcae096961a9ad5aa5dd37",
+      "web/vendor/cytoscape.min.js": "5f3b5b529546d5af1fc5628590af033b74511a5b6f789f5f4682845863228b91"
+    },
+    "bridge_module": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\release-r4\\agent-bridge.pyz\\bridge.py",
+    "build": "shared-session-graph-20261015"
+  },
+  "routes": [
+    {
+      "url": "/",
+      "disk": "42dd74918382a118049f21e4ea5a3a27ca66f2a7e60c06c5f01380f9d83fb5c9",
+      "http": "42dd74918382a118049f21e4ea5a3a27ca66f2a7e60c06c5f01380f9d83fb5c9",
+      "loaded": "42dd74918382a118049f21e4ea5a3a27ca66f2a7e60c06c5f01380f9d83fb5c9",
+      "match": true
+    },
+    {
+      "url": "/app.js",
+      "disk": "5c39b3ad3b020e09a9da0f7ac5940c8de1175106ccf78c21bd4adb0bca38a2c1",
+      "http": "5c39b3ad3b020e09a9da0f7ac5940c8de1175106ccf78c21bd4adb0bca38a2c1",
+      "loaded": "5c39b3ad3b020e09a9da0f7ac5940c8de1175106ccf78c21bd4adb0bca38a2c1",
+      "match": true
+    },
+    {
+      "url": "/style.css",
+      "disk": "f58fede9628baeb24df87a0c1119f675fe6b45a6be2c3fb991fdc869ce4f1463",
+      "http": "f58fede9628baeb24df87a0c1119f675fe6b45a6be2c3fb991fdc869ce4f1463",
+      "loaded": "f58fede9628baeb24df87a0c1119f675fe6b45a6be2c3fb991fdc869ce4f1463",
+      "match": true
+    },
+    {
+      "url": "/task-graph.js",
+      "disk": "af2e04da8aca31631cc21491b2118142b51440d099bcae096961a9ad5aa5dd37",
+      "http": "af2e04da8aca31631cc21491b2118142b51440d099bcae096961a9ad5aa5dd37",
+      "loaded": "af2e04da8aca31631cc21491b2118142b51440d099bcae096961a9ad5aa5dd37",
+      "match": true
+    },
+    {
+      "url": "/vendor/cytoscape.min.js",
+      "disk": "5f3b5b529546d5af1fc5628590af033b74511a5b6f789f5f4682845863228b91",
+      "http": "5f3b5b529546d5af1fc5628590af033b74511a5b6f789f5f4682845863228b91",
+      "loaded": "5f3b5b529546d5af1fc5628590af033b74511a5b6f789f5f4682845863228b91",
+      "match": true
+    }
+  ],
+  "kernel_matches": {
+    "bridge": true,
+    "adapters": true
+  },
+  "task_count": 11,
+  "task_states": [
+    {
+      "id": "bridge-b0-luna-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/gpt-6-luna"
+    },
+    {
+      "id": "bridge-b1-flash-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "id": "bridge-b1-luna-audit-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/gpt-6-luna"
+    },
+    {
+      "id": "bridge-b1-ui-fix-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "id": "dsh-background-review-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": null
+    },
+    {
+      "id": "m1-storage-audit-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": null
+    },
+    {
+      "id": "m2-workbench-ui-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "id": "opencode-go-fullchain-docs-r3",
+      "status": "awaiting_user",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "id": "opencode-readme-update-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "id": "shared-visible-doc-20261015",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    },
+    {
+      "id": "ui-real-opencode-20261015-1238",
+      "status": "awaiting_review",
+      "acceptance": "BLOCKED",
+      "model": "opencode-go/deepseek-v4.1-flash"
+    }
+  ],
+  "dom_count_match": true,
+  "original_files": [
+    {
+      "path": ".gitignore",
+      "match": true
+    },
+    {
+      "path": "README.md",
+      "match": true
+    },
+    {
+      "path": "adapters.py",
+      "match": true
+    },
+    {
+      "path": "bridge.py",
+      "match": true
+    },
+    {
+      "path": "schemas/task.schema.json",
+      "match": true
+    },
+    {
+      "path": "skills/agent-bridge/SKILL.md",
+      "match": true
+    },
+    {
+      "path": "tests/manual_checks.py",
+      "match": true
+    },
+    {
+      "path": "tests/prepare_live_fixtures.py",
+      "match": true
+    },
+    {
+      "path": "tests/webui_checks.py",
+      "match": true
+    },
+    {
+      "path": "web/app.js",
+      "match": true
+    },
+    {
+      "path": "web/index.html",
+      "match": true
+    },
+    {
+      "path": "web/style.css",
+      "match": true
+    },
+    {
+      "path": "webui.py",
+      "match": true
+    }
+  ],
+  "original_source_status": "M README.md\n M adapters.py\n M bridge.py\n M schemas/task.schema.json\n M skills/agent-bridge/SKILL.md\n M web/app.js\n M web/index.html\n M webui.py",
+  "integration_status": "",
+  "product_head": "b78c5a6c3021f9e3380098d6cf52da4478a02b8d",
+  "product_status": "",
+  "model_requests": 0,
+  "scope": "本机只读事实核验，非全量测试"
+}

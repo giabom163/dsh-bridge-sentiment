@@ -1,0 +1,22 @@
+{
+  "_template": "add-annotator —— 新增离线标注器（基于 S3-B 的真实教训）",
+  "title": "{{TITLE}}",
+  "opencode_mode": "standalone",
+  "task_id": "{{TASK_ID}}",
+  "goal": "【复用优先】① 复用 `analysis.py` 里已审查过的 HTTP 细节（裸模型 id、`reasoning_effort:\"none\"`、三个必备头、错误保留）——**不要重写一套**；② 复用 `storage.py` 的读取与规范化；③ 复用现有 `tools/` 里脚本的参数风格（--limit/--batch/--dry-run/--min-interval）。\n\n【本次交付】{{DELIVERABLE}}。要求：\\n1. **只读数据库**：用 `mode=ro`（或 immutable）打开，只 SELECT，**不写 records、不改表结构**；\\n2. 批量调用（`--batch` ≤25/次），批次间 `--min-interval` 节流；\\n3. 枚举越界一律降级为保守值（不抛错、不原样输出）；\\n4. `--dry-run` **不发起任何网络请求**；\\n5. 失败保留真实 HTTP 状态码与响应体前 200 字，不自动重试；\\n6. 输出落文件（JSONL + summary JSON），不写数据库。\n\n【交付前必跑自检（离线、0 网络）】\\n`python -B \"{{SELFCHECK}}\" --kind annotator --worktree . --allow \"{{ALLOW}}\" --artifacts \"{{ARTIFACTS}}\"`\\n必须 `verdict=pass`，把完整 JSON 贴进交付说明。\n\n【证据分工（重要）】本任务**没有模型凭据**：你负责实现 + `--dry-run` 证据 + 用桩验证枚举降级与失败路径；**真实模型调用由主线程在产品侧补跑**，交付说明里写明「真实调用未做，由主线程补」。",
+  "repo": "{{REPO}}",
+  "executor": "opencode",
+  "model": "{{MODEL}}",
+  "allowed_paths": ["tools/", "docs/"],
+  "artifacts": ["{{ARTIFACT_1}}", "{{ARTIFACT_2}}"],
+  "input_refs": ["analysis.py", "storage.py"],
+  "anchors": ["analysis.py:1"],
+  "completion_criteria": [
+    "只改 tools/ 与 docs/ 下的文件；数据库只读、不改表结构、不写 records",
+    "HTTP 细节复用 analysis.py（裸模型 id + reasoning_effort=none + 三头 + 错误保留）",
+    "枚举越界降级为保守值，不抛错、不原样输出",
+    "--dry-run 不发起任何网络请求；批次间有节流",
+    "交付前 selfcheck.py --kind annotator 必须 verdict=pass，且完整 JSON 已贴出"
+  ],
+  "timeout_seconds": 900
+}

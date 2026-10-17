@@ -1,0 +1,60 @@
+{
+  "acceptance": "BLOCKED",
+  "checks": [
+    {
+      "check": "prompt_single_json_workspace_basecommit",
+      "detail": {
+        "base_commit_inline": true,
+        "contract_json_content_matches": true,
+        "contract_json_once": true,
+        "goal_not_repeated_outside_json": true,
+        "legacy_contract_validates": true,
+        "legacy_json_has_no_title": true,
+        "legacy_prompt_single_json": true,
+        "store_dir_not_used_as_workspace": true,
+        "workspace_from_attempt_worktree": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "anchors_and_artifacts_boundaries",
+      "detail": {
+        "artifact_inside_allowed_paths_accepted": true,
+        "artifact_outside_allowed_paths_rejected": true,
+        "bad_format_rejected": true,
+        "legacy_no_anchors_accepted": true,
+        "legal_anchor_accepted": true,
+        "nonpositive_line_rejected": true,
+        "out_of_bounds_rejected": true,
+        "reversed_range_rejected": true,
+        "unanchored_file_not_in_input_refs_rejected": true
+      },
+      "status": "PASS"
+    },
+    {
+      "check": "titleless_id_tail_and_full_list_node",
+      "detail": {
+        "full_task_id_in_list": true,
+        "node_labels": {
+          "opencode-go-fullchain-docs-r3": "…encode-go-fullchain-docs-r3",
+          "opencode-readme-update-20261015": "…code-readme-update-20261015",
+          "titled-fixture": "B0 状态映射审查",
+          "ui-real-opencode-20261015-1238": "…real-opencode-20261015-1238"
+        },
+        "tail_label_in_list": true,
+        "tails_match_real_node_labels": true,
+        "tails_pairwise_distinct": true,
+        "title_still_prioritized": true
+      },
+      "status": "PASS"
+    }
+  ],
+  "executed_checks": [
+    "prompt_single_json_workspace_basecommit",
+    "anchors_and_artifacts_boundaries",
+    "titleless_id_tail_and_full_list_node"
+  ],
+  "limit": 3,
+  "model_requests": 0,
+  "retained_directory": "C:\\Users\\Lenovo\\Documents\\Codex\\bridge-work\\data\\tasks\\bridge-b2-prompt-label-20261015\\attempts\\attempt-b7ab4a9260eb4ec885814898cf48a80a\\workspace\\data\\prompt-check-1979b1e02c93"
+}

@@ -1,0 +1,6 @@
+# B2 最小修复契约
+1. bridge.py仅修改validate_task相关anchors校验及prompt_for；完整task JSON只内联一次，移除goal/allowed_paths/artifacts/criteria逐字复述。补当前真实attempt.worktree与base_commit；directory参数实际为桥任务store路径，禁止误当工作区。allowed_paths是可改范围，artifacts是必交产物；已有子集校验保留。anchors可选字符串数组，如web/task-graph.js:147,184,251-253，验证相对路径和正整数行区间、拒绝越界和反向区间，锚点文件需列input_refs以固定hash；旧契约无anchors继续兼容。schema同步语义与格式。
+2. 默认不执行测试/服务/桌面；仅契约明确授权的小范围语法或定向检查可以执行，不全局新放权。列允许替代行为（读源码/报告缺证据）。保持进度NOT_STARTED/READY/RUNNING/DONE/BLOCKED与验收PASS/FAIL/BLOCKED独立；执行者不能自动人工accept，但Luna允许只读审计结论。timeout只来自字段，包装不重复。用结构化回归断言JSON唯一且内容一致、goal不在JSON外重复，避免对任意短goal的count或武断长度上限误拒。不要改run/取消/认证/锁/原生适配器。
+3. web/task-graph.js只修缺title标签：长task_id用尾部（带省略标识）防公共前缀难区分；完整id在文本列表和点击详情可得，title仍优先且图限长。保留grid/breadthfirst/hidden修复/搜索/状态语义。无解析边明确暂无依赖记录，不声称边已实机覆盖。
+4. 新增tests/prompt_checks.py --limit N，分三组：prompt单次JSON及真实workspace/basecommit/旧契约兼容；anchors合法/越界/反向/未哈希输入、artifacts越界拒绝；用已有Node实际运行标签逻辑（无浏览器/联网）验证三条历史缺title ID尾部和完整列表可得，不能仅字符串出现断言。明确授权首次--limit 3一次、node --check、内存compile纯语法检查；禁止全量与持久服务。失败如实记录并保留报告，勿自动重跑。
+5. docs/B2-implementation.md精简说明实际复用、修复与未验；README.md只补上述契约语义短节。复用已落地Cytoscape core与内置布局、现有桥服务/轮询/CLI与Python标准库；不新增依赖，不联网，不复制TrendRadar/BettaFish代码来完成无关修复。vendor NOTICE保留原始取证事实，不把用户独立报告当本次实测。

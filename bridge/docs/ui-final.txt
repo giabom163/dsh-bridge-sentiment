@@ -1,0 +1,249 @@
+Browser tab: 2, Title: "Agent Bridge · 本地控制台", URL: "http://127.0.0.1:8765/".
+0 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8765/
+	1 container
+		2 link Description: Agent Bridge 首页, Value: 127.0.0.1:8765/
+		3 text 工作区
+		4 button ◫ 任务总览 12, ID: navTasks
+			5 text ◫
+			6 text 任务总览
+			7 text 12
+		8 text 仅本机可访问 127.0.0.1 · 不对局域网开放 AB Agent Bridge Demo 本地执行 · 人工验收
+	9 container
+		10 container
+			11 text 工作区  / 任务总览
+		12 text 本地连接
+		13 button ↻, Help: 刷新任务, ID: refreshButton
+		14 button ＋ 新建任务, ID: newTaskButton
+			15 text ＋
+			16 text 新建任务
+		17 text 执行与审查
+		18 heading 任务控制台, Value: 1
+			19 text 任务控制台
+		20 text 在这里查看桥状态、审阅计划，并按任务逐项批准执行与验收。
+		21 text LOOPBACK
+		22 text 数据留在本机
+		23 container metrics
+			24 container
+				25 text 任务总数 ◫ 12 本地任务记录
+			26 container
+				27 text 正在执行 ↗ 0 桥持有的执行任务
+			28 container
+				29 text 等待审查 ◇ 12 需要人工查看
+			30 container
+				31 text 验收阻塞 ! 12 证据不足或待操作
+		32 container 任务协同图
+			33 heading 任务协同图, Value: 2, ID: graphHeading
+				34 text 任务协同图
+			35 text 节点为真实任务；边仅来自 task.dependencies（当前尝试，非完整历史）
+			36 text 已连接 · 最后成功刷新 2026/10/15 22:23:54
+			37 container Description: 任务依赖关系图；下方提供等价文本列表, ID: taskGraph
+			38 container
+				39 button (expanded) 任务文本列表（可访问，与搜索同步过滤）, Secondary Actions: Collapse
+					40 text 任务文本列表（可访问，与搜索同步过滤）
+				41 content list graphList
+					42 container
+						43 button B0 桥UI状态映射与最小改动审查, Help: bridge-b0-luna-20261015
+						44 text 待审查 验收：阻塞 模型：opencode-go/gpt-6-luna
+					45 container
+						46 button B1 修订：首次失败空态与真实限量检查, Help: bridge-b1-flash-20261015
+						47 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					48 container
+						49 button B1 Luna最终只读复审：修复与真实UI证据, Help: bridge-b1-luna-audit-20261015
+						50 text 待审查 验收：阻塞 模型：opencode-go/gpt-6-luna
+					51 container
+						52 button R1 修订：真实任务图标题与布局可读性, Help: bridge-b1-ui-fix-20261015
+						53 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					54 container
+						55 button B2 修订：模板授权语义与列表完整ID, Help: bridge-b2-prompt-label-20261015
+						56 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					57 container
+						58 button 后台桥验收：监测方案短审查, Help: dsh-background-review-20261015
+						59 text 待审查 验收：阻塞 模型：未记录
+					60 container
+						61 button M1 evidence and transaction bounded audit, Help: m1-storage-audit-20261015
+						62 text 待审查 验收：阻塞 模型：未记录
+					63 container
+						64 button M2 real API workbench and evidence cards, Help: m2-workbench-ui-20261015
+						65 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					66 container
+						67 button opencode-go-fullchain-docs-r3
+						68 text 待用户验收 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					69 container
+						70 button opencode-readme-update-20261015
+						71 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					72 container
+						73 button 桥修复验收：共享会话短文档, Help: shared-visible-doc-20261015
+						74 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+					75 container
+						76 button ui-real-opencode-20261015-1238
+						77 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+			78 container graphNote
+				79 text 来源：GET /api/tasks（每条为当前尝试，非完整历史） 暂无依赖记录（依赖边仅来自 task.dependencies）。
+		80 heading 任务, Value: 2
+			81 text 任务
+		82 text 状态从桥的本地记录读取
+		83 container
+			84 text ⌕
+			85 search text field (settable) ⌕, ID: searchInput
+		86 table
+			87 row
+				88 cell
+					89 text 任务
+				90 cell
+					91 text 执行器
+				92 cell
+					93 text 状态
+				94 cell
+					95 text 最近更新
+			96 container taskRows
+				97 row
+					98 cell
+						99 text B0 桥UI状态映射与最小改动审查
+						100 text bridge-b0-luna-20261015 · r1
+					101 cell
+						102 text opencode
+					103 cell
+						104 text 待审查
+					105 cell
+						106 text 10/15 20:49
+					107 cell
+						108 text ›
+				109 row
+					110 cell
+						111 text B1 修订：首次失败空态与真实限量检查
+						112 text bridge-b1-flash-20261015 · r2
+					113 cell
+						114 text opencode
+					115 cell
+						116 text 待审查
+					117 cell
+						118 text 10/15 21:17
+					119 cell
+						120 text ›
+				121 row
+					122 cell
+						123 text B1 Luna最终只读复审：修复与真实UI证据
+						124 text bridge-b1-luna-audit-20261015 · r2
+					125 cell
+						126 text opencode
+					127 cell
+						128 text 待审查
+					129 cell
+						130 text 10/15 21:35
+					131 cell
+						132 text ›
+				133 row
+					134 cell
+						135 text R1 修订：真实任务图标题与布局可读性
+						136 text bridge-b1-ui-fix-20261015 · r2
+					137 cell
+						138 text opencode
+					139 cell
+						140 text 待审查
+					141 cell
+						142 text 10/15 21:29
+					143 cell
+						144 text ›
+				145 row
+					146 cell
+						147 text B2 修订：模板授权语义与列表完整ID
+						148 text bridge-b2-prompt-label-20261015 · r2
+					149 cell
+						150 text opencode
+					151 cell
+						152 text 待审查
+					153 cell
+						154 text 10/15 22:22
+					155 cell
+						156 text ›
+				157 row
+					158 cell
+						159 text 后台桥验收：监测方案短审查
+						160 text dsh-background-review-20261015 · r1
+					161 cell
+						162 text dsh
+					163 cell
+						164 text 待审查
+					165 cell
+						166 text 10/15 15:31
+					167 cell
+						168 text ›
+				169 row
+					170 cell
+						171 text M1 evidence and transaction bounded audit
+						172 text m1-storage-audit-20261015 · r2
+					173 cell
+						174 text dsh
+					175 cell
+						176 text 待审查
+					177 cell
+						178 text 10/15 16:33
+					179 cell
+						180 text ›
+				181 row
+					182 cell
+						183 text M2 real API workbench and evidence cards
+						184 text m2-workbench-ui-20261015 · r1
+					185 cell
+						186 text opencode
+					187 cell
+						188 text 待审查
+					189 cell
+						190 text 10/15 16:42
+					191 cell
+						192 text ›
+				193 row
+					194 cell
+						195 text 基于仓库实现与下列已核实事实，编写 docs/opencode-go-bridge-setup.md 中文操作指南：说明官方 OpenCode Go 的订阅/API key 接入路径、命令行与桥的真实调用链、模型 ID 写法、如何区分 CC Switch 自定义代理与官方 provider、已有证据、仍未解决的问题及安全排障步骤。不要改源码/配置，不要输出或读取任何密钥，不要发送额外模型请求；只创建这个文档。官方事实：OpenCode 官方文档 https://docs.opencode.ai/docs/go/ 说明：订阅 OpenCode Go 后用 TUI /connect 选择 OpenCode Go 并输入 API key，/models 可看模型；CLI/配置模型 ID 格式 opencode-go/<model-id>；官方当前列表包括 DeepSeek V4.1 Flash。桥从本机已存 OpenCode auth 调用托管 OpenCode 2.0.20 CLI，命令形式 run --standalone --format json --model provider/model。`auth list` 显示 OpenCode Console Personal stored；此前本机模型输出包括 opencode-go/deepseek-v4.1-flash。桥既往真实任务记录含 opencode-go/deepseek-v4.1-flash provider/model 事件与本地 usage，但请求数和 cost 单位无法从这些记录证实；上一报告文字与真实调用矛盾，桥当前状态 BLOCKED 因没有可采信 GUI 用户路径证据。不要把套餐已保存等同额度/连通性保证。CC Switch 中有自定义 ocgo/本地代理配置，不等于官方 OpenCode Go；本次不修改 CC Switch 或全局配置。
+						196 text opencode-go-fullchain-docs-r3 · r1
+					197 cell
+						198 text opencode
+					199 cell
+						200 text 待用户验收
+					201 cell
+						202 text 10/15 12:16
+					203 cell
+						204 text ›
+				205 row
+					206 cell
+						207 text 仅更新 README.md。先完整阅读 README.md，并只读 adapters.py 确认桥命令。保留原有操作命令和边界，修正文档中“真实模型尚未执行”“控制台未经过真实浏览器验收”等过时表述，增加“2026-10-15 真实桥验收与客户端查找”小节。已核实事实：OpenCode V2 Console Personal 工作区连接保持不变；桥实际 run --standalone --format json --model opencode-go/deepseek-v4.1-flash，在每任务独立 detached worktree 工作，并非接到用户当前桌面会话；真实浏览器控制台 http://127.0.0.1:8765 已走完新建、计划、确认、启动和结果显示；任务 ui-real-opencode-20261015-1238 退出0，唯一产物 reports/frontend-receipt.md 三行内容和哈希一致；对应本机OpenCode会话 ses_ec223cfa2ffeQ7YYrHaxg1qiPZ 已从本机数据库关联。客户端当前列表不显示的原因尚未用GUI对照实证，不能保证自动出现或指定打开方式。桥 result 的 session_id、usage、upstream_requests 仍为null。浏览器安全审批拒绝了审查文件上传，任务待审查、整体BLOCKED，不能绕过安全审批。取消、修订和复杂项目尚未验收。建议在文档列出查找信息应包含任务ID、attempt、工作目录和session ID，前端联动客户端仍需实现与验收。不要联网、不要发起额外模型探测、不要读认证文件、不要运行shell命令或测试、不要创建子代理、不改其他文件。完成后简短说明文档改动。
+						208 text opencode-readme-update-20261015 · r1
+					209 cell
+						210 text opencode
+					211 cell
+						212 text 待审查
+					213 cell
+						214 text 10/15 12:53
+					215 cell
+						216 text ›
+				217 row
+					218 cell
+						219 text 桥修复验收：共享会话短文档
+						220 text shared-visible-doc-20261015 · r1
+					221 cell
+						222 text opencode
+					223 cell
+						224 text 待审查
+					225 cell
+						226 text 10/15 15:05
+					227 cell
+						228 text ›
+				229 row
+					230 cell
+						231 text 只创建 reports/frontend-receipt.md，写入以下三行：# Frontend real bridge receipt Task: ui-real-opencode-20261015-1238 Connection: OpenCode V2 Console workspace (Personal). 请用文件写入工具写完后结束。不运行测试或shell命令、不联网检索、不读取凭据、不创建子代理、不修改其他文件。
+						232 text ui-real-opencode-20261015-1238 · r1
+					233 cell
+						234 text opencode
+					235 cell
+						236 text 待审查
+					237 cell
+						238 text 10/15 12:40
+					239 cell
+						240 text ›
+		241 container detailPanel
+			242 text 选择一个任务
+			243 text 计划、执行结果和审查记录会显示在这里。
+		244 text shared-session-graph-20261015 · PID 37472 · bridge 97e3a87d5012
+		245 text 执行前逐项批准 · 结果由人审查
+
+The focused UI element is 0 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8765/

@@ -1,0 +1,81 @@
+Browser tab: 3, Title: "Agent Bridge · 本地控制台", URL: "http://127.0.0.1:8766/".
+1 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8766/
+	2 text ⚠ 样本夹具（empty）：真实 UI + 固定 /api/tasks；由 tests/graph_checks.py --serve-ui-fixture 提供；独立临时 store，非真实 store，无模型请求、无外部访问。
+	3 container
+		4 link Description: Agent Bridge 首页, Value: 127.0.0.1:8766/
+		5 text 工作区
+		6 button ◫ 任务总览 0, ID: navTasks
+			7 text ◫
+			8 text 任务总览
+			9 text 0
+		10 text 仅本机可访问 127.0.0.1 · 不对局域网开放 AB Agent Bridge Demo 本地执行 · 人工验收
+	11 container
+		12 container
+			13 text 工作区  / 任务总览
+		14 text 本地连接
+		15 button ↻, Help: 刷新任务, ID: refreshButton
+		16 button ＋ 新建任务, ID: newTaskButton
+			17 text ＋
+			18 text 新建任务
+		19 text 执行与审查
+		20 heading 任务控制台, Value: 1
+			21 text 任务控制台
+		22 text 在这里查看桥状态、审阅计划，并按任务逐项批准执行与验收。
+		23 text LOOPBACK
+		24 text 数据留在本机
+		25 container metrics
+			26 container
+				27 text 任务总数 ◫ 0 本地任务记录
+			28 container
+				29 text 正在执行 ↗ 0 桥持有的执行任务
+			30 container
+				31 text 等待审查 ◇ 0 需要人工查看
+			32 container
+				33 text 验收阻塞 ! 0 证据不足或待操作
+		34 container 任务协同图
+			35 heading 任务协同图, Value: 2, ID: graphHeading
+				36 text 任务协同图
+			37 text 节点为真实任务；边仅来自 task.dependencies（当前尝试，非完整历史）
+			38 text 已连接 · 最后成功刷新 2026/10/15 21:31:07
+			39 container
+				40 container Description: 任务依赖关系图；下方提供等价文本列表, ID: taskGraph
+				41 container graphEmpty
+					42 text ◫
+					43 text 暂无任务
+					44 text 创建任务后，这里会按依赖关系绘制节点与边。
+			45 container
+				46 button (expanded) 任务文本列表（可访问，与搜索同步过滤）, Secondary Actions: Collapse
+					47 text 任务文本列表（可访问，与搜索同步过滤）
+				48 content list graphList
+					49 text 暂无任务。
+			50 text 来源：GET /api/tasks（每条为当前尝试，非完整历史）
+		51 heading 任务, Value: 2
+			52 text 任务
+		53 text 状态从桥的本地记录读取
+		54 container
+			55 text ⌕
+			56 search text field (settable) ⌕, ID: searchInput
+		57 table
+			58 row
+				59 cell
+					60 text 任务
+				61 cell
+					62 text 执行器
+				63 cell
+					64 text 状态
+				65 cell
+					66 text 最近更新
+		67 container emptyState
+			68 text ◫
+			69 text 还没有任务
+			70 text 创建任务契约后，可在这里规划、执行和审查。
+			71 button 创建第一个任务 →, ID: emptyNewButton
+				72 text 创建第一个任务 
+				73 text →
+		74 container detailPanel
+			75 text 选择一个任务
+			76 text 计划、执行结果和审查记录会显示在这里。
+		77 text shared-session-graph-20261015 · PID 12172 · bridge 94f03496f858
+		78 text 执行前逐项批准 · 结果由人审查
+
+The focused UI element is 1 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8766/

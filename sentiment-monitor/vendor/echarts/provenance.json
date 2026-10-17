@@ -1,0 +1,38 @@
+{
+  "component": "Apache ECharts",
+  "version": "5.6.0",
+  "source": "https://registry.npmjs.org/echarts/-/echarts-5.6.0.tgz",
+  "registry_metadata": "https://registry.npmjs.org/echarts/5.6.0",
+  "package_sha256": "e1b82487dd7f8d9f0438eec1f1433051148e0095ac7a15d4db890afda45cf610",
+  "package_sha1_verified": "2377874dca9fb50f104051c3553544752da3c9d6",
+  "package_integrity_verified": "sha512-oTbVTsXfKuEhxftHqL5xprgLoc0k7uScAwtryCgWF6hPYFLRwOUHiFmHGCBKP5NPFNkDVopOieyUqYGH8Fa3kA==",
+  "license": "Apache-2.0 plus bundled d3 BSD-3-Clause notice",
+  "unmodified": true,
+  "cdn": false,
+  "files": [
+    {
+      "path": "vendor/echarts/echarts.min.js",
+      "package_path": "package/dist/echarts.min.js",
+      "sha256": "bf4a223524e40b77c304bec67e1222cf551f14880cf42c69dc046558e11c07b1",
+      "bytes": 1034102
+    },
+    {
+      "path": "vendor/echarts/LICENSE",
+      "package_path": "package/LICENSE",
+      "sha256": "634293835b43a6dd2094fa39182a3d9a6b9ca43b7fdb9ac354e8037af2a3093a",
+      "bytes": 11990
+    },
+    {
+      "path": "vendor/echarts/NOTICE",
+      "package_path": "package/NOTICE",
+      "sha256": "fa99ac3af859d0e13166906dc53a73ad34a08898da7e8ae83407275496e9e30c",
+      "bytes": 168
+    },
+    {
+      "path": "vendor/echarts/licenses/LICENSE-d3",
+      "package_path": "package/licenses/LICENSE-d3",
+      "sha256": "e1211892da0b0e0585b7aebe8f98c1274fba15bafe47fa1f4ee8a7a502c06304",
+      "bytes": 1475
+    }
+  ]
+}

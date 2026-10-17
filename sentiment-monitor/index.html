@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>舆情观察台 · 议题与表达线索</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">跳到主内容</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <svg class="brand-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M2 13h3.2l1.8-6 3 12 2.6-9 1.8 3H22" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1 class="brand-title">舆情监测分析平台</h1>
+      <span class="brand-tag">观察台</span>
+    </div>
+    <nav class="tabs" id="main-nav" role="tablist" aria-label="主导航">
+      <button class="tab" role="tab" id="tab-overview" aria-controls="view-overview" aria-selected="true" data-view="overview" tabindex="0">总览大屏</button>
+      <button class="tab" role="tab" id="tab-topics" aria-controls="view-topics" aria-selected="false" data-view="topics" tabindex="-1">话题分析</button>
+      <button class="tab" role="tab" id="tab-search" aria-controls="view-search" aria-selected="false" data-view="search" tabindex="-1">舆情检索</button>
+      <button class="tab" role="tab" id="tab-watch" aria-controls="view-watch" aria-selected="false" data-view="watch" tabindex="-1">观察清单</button>
+      <button class="tab weak" role="tab" id="tab-admin" aria-controls="view-admin" aria-selected="false" data-view="admin" tabindex="-1">数据管理</button>
+    </nav>
+    <div class="top-actions">
+      <div id="connection" class="conn loading" role="status" aria-live="polite">正在检查本地服务…</div>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="notice" class="notice" role="status" aria-live="polite"></div>
+
+    <!-- 业务一（默认）：总览 -->
+    <section id="view-overview" class="view" role="tabpanel" aria-labelledby="tab-overview" tabindex="0">
+      <section class="panel">
+        <div class="section-title">
+          <div><p class="eyebrow">OVERVIEW</p><h2>总览</h2></div>
+          <div class="card-actions">
+            <button id="overview-reload" class="secondary" type="button">重新读取本地数据</button>
+          </div>
+        </div>
+        <p class="hint">
+          本页只读取本机已有材料，不抓取、不刷新来源、不生成结论。
+          总览只保留少量原帖捷径，完整分组排名在「议题与表达线索」，筛选浏览在「原帖检索」。
+        </p>
+        <div id="overview-status" class="biz-status" role="status" aria-live="polite">尚未读取本地数据。</div>
+
+        <section class="stats" id="overview-stats" aria-label="总览指标" hidden>
+          <article><span>采得原帖（人工候选身份）</span><strong id="ov-identity">—</strong></article>
+          <article><span>人工候选组（非确认事件）</span><strong id="ov-groups">—</strong></article>
+          <article><span>最近观测（本次已载入材料）</span><strong id="ov-observed">—</strong></article>
+        </section>
+
+        <div class="biz-filters" id="overview-filters" aria-label="统一筛选（来源 / 证据类型 / 关键词）"></div>
+        <p class="filter-note" id="overview-filter-note"></p>
+
+        <div class="ov-grid">
+          <section class="ov-col">
+            <h3 class="col-title">议题候选（人工分组，短摘要）</h3>
+            <div id="overview-topics" class="topic-rows"></div>
+          </section>
+          <section class="ov-col">
+            <h3 class="col-title">当前热度（最新观测）</h3>
+            <div id="overview-heat" class="heat-box"></div>
+          </section>
+        </div>
+
+        <h3 class="col-title">原帖证据捷径</h3>
+        <div id="overview-shortcuts" class="p1-cards"></div>
+      </section>
+    </section>
+
+    <!-- 业务二：议题与表达线索（固定标题） -->
+    <section id="view-topics" class="view" role="tabpanel" aria-labelledby="tab-topics" tabindex="0" hidden>
+      <section class="panel">
+        <div class="section-title">
+          <div><p class="eyebrow">TOPICS</p><h2>议题与表达线索</h2></div>
+          <div class="card-actions">
+            <label class="inline-field">每组展示条数
+              <select id="topics-topk">
+                <option value="3" selected>3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            </label>
+            <button id="topics-reload" class="secondary" type="button">重新读取本地数据</button>
+          </div>
+        </div>
+        <p class="hint">
+          分组为人工指定，相似标题不直接合并事件。排名仅按精确评论数降序，约数与未知计数单列不参与排名。
+          标题线索证据不足时降级为议题候选，不推断作者性别、阵营或群体比例，不把关联当因果。
+        </p>
+        <div id="topics-status" class="biz-status" role="status" aria-live="polite">尚未读取本地数据。</div>
+
+        <div class="biz-filters" id="topics-filters" aria-label="统一筛选（来源 / 证据类型 / 关键词）"></div>
+        <p class="filter-note" id="topics-filter-note"></p>
+
+        <div class="topics-layout">
+          <aside class="topic-list" id="topic-list" aria-label="议题 / 人工分组列表"></aside>
+          <div class="topic-main">
+            <section class="topic-summary" id="topic-summary"></section>
+            <h3 class="col-title">该议题 Top K 原帖</h3>
+            <div id="topic-topk" class="p1-cards"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="topics-report-entry">
+        <div class="section-title">
+          <div><p class="eyebrow">REPORT</p><h2>报告（轻量入口）</h2></div>
+          <button id="topics-goto-report" class="secondary" type="button">前往报告模板（数据管理）</button>
+        </div>
+        <p class="hint">
+          当前没有已实现的语义报告或事件认定：仅有本地「未复核样本模板」，由本机已有材料键值拼装，不代表结论。
+          本页不生成议题结论。
+        </p>
+      </section>
+    </section>
+
+    <!-- 业务三：原帖检索 -->
+    <section id="view-search" class="view" role="tabpanel" aria-labelledby="tab-search" tabindex="0" hidden>
+      <section class="panel">
+        <div class="section-title">
+          <div><p class="eyebrow">LOCAL SEARCH</p><h2>原帖检索</h2></div>
+          <div class="card-actions">
+            <button id="search-reload" class="secondary" type="button">重新读取本地数据</button>
+          </div>
+        </div>
+        <p class="hint">
+          范围：仅对本次已载入的原帖（全库候选最多 3 条）做本地标题 / 内容 / 来源过滤，
+          不是全库检索，也不检索旧 RSS 原文；旧 RSS 材料请在「数据管理 → 原文与证据」查看。
+        </p>
+        <div id="search-status" class="biz-status" role="status" aria-live="polite">尚未读取本地数据。</div>
+        <div class="biz-filters" id="search-filters" aria-label="统一筛选（来源 / 证据类型 / 关键词）"></div>
+        <p class="filter-note" id="search-filter-note"></p>
+        <div id="search-results" class="p1-cards"></div>
+      </section>
+    </section>
+
+    <!-- 业务四：观察清单（人工加入 / 退出 + 同帖真实历史） -->
+    <section id="view-watch" class="view" role="tabpanel" aria-labelledby="tab-watch" tabindex="0" hidden>
+      <section class="panel">
+        <div class="section-title">
+          <div><p class="eyebrow">WATCHLIST</p><h2>观察清单</h2></div>
+          <div class="card-actions">
+            <button id="watch-reload" class="secondary" type="button">重新读取本地数据</button>
+          </div>
+        </div>
+        <p class="hint">
+          观察清单由人工逐帖加入：加入不抓取、不刷新来源、不自动续期；退出或 24 小时到期只结束观察资格，
+          不删除任何证据与历史。活跃观察最多 3 帖，与 TopK 展示排名无关；掉出 TopK 的原帖仍可按人工导入继续追加真实观测。
+          时间与计数只来自已导入的真实观测，未补造历史。
+        </p>
+        <div id="watch-status" class="biz-status" role="status" aria-live="polite">尚未读取本地数据。</div>
+        <div class="biz-filters" id="watch-filters" aria-label="统一筛选（来源 / 证据类型 / 关键词 / 观测日期窗口）"></div>
+        <p class="filter-note" id="watch-filter-note"></p>
+
+        <h3 class="col-title">活跃观察（最多 3）</h3>
+        <div id="watch-active" class="p1-cards"></div>
+
+        <h3 class="col-title">观察历史（含已退出 / 已到期周期，均可查看）</h3>
+        <div class="table-wrap">
+          <table class="table watch-history-table">
+            <thead>
+              <tr>
+                <th scope="col">原帖</th><th scope="col">来源</th><th scope="col">状态</th><th scope="col">加入时刻</th>
+                <th scope="col">到期时刻</th><th scope="col">加入原因</th><th scope="col">退出时刻 / 原因</th>
+                <th scope="col">首次观测</th><th scope="col">最近观测</th><th scope="col">查看</th>
+              </tr>
+            </thead>
+            <tbody id="watch-history-body">
+              <tr><td colspan="10" class="muted">尚未读取数据。</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="watch-detail-actions" class="card-actions"></div>
+        <div id="watch-admin-status" class="admin-status" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="panel" id="watch-detail">
+        <div class="section-title">
+          <div><p class="eyebrow">PER-POST HISTORY</p><h2 id="watch-detail-title">同帖历史</h2></div>
+        </div>
+        <p class="hint" id="watch-detail-status">
+          从上方选择一个观察周期，查看该原帖的真实观测历史。计数与速率分两张图，缺测不补 0、不做插值；单点只画点并等待第二个观测点。
+        </p>
+        <div class="chart-grid">
+          <figure class="chart-fig">
+            <figcaption id="chart-count-status">累计评论计数（真实观测点）</figcaption>
+            <div id="chart-count" class="chart" role="img" aria-label="累计评论计数图表"></div>
+          </figure>
+          <figure class="chart-fig">
+            <figcaption id="chart-rate-status">每小时变化率（按真实秒数归一）</figcaption>
+            <div id="chart-rate" class="chart" role="img" aria-label="每小时变化率图表"></div>
+          </figure>
+        </div>
+        <h3 class="col-title">可读历史表（同源真实观测）</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">观测时刻</th><th scope="col">评论计数</th><th scope="col">精度</th><th scope="col">实际间隔</th>
+                <th scope="col">变化量</th><th scope="col">每小时变化率</th><th scope="col">可比性</th>
+              </tr>
+            </thead>
+            <tbody id="watch-history-points">
+              <tr><td colspan="7" class="muted">尚未选择观察周期。</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+
+    <!-- 弱入口：数据管理（承接旧来源与导入 / 原文与证据 / 报告 / 运行） -->
+    <section id="view-admin" class="view" role="tabpanel" aria-labelledby="tab-admin" tabindex="0" hidden>
+      <section class="panel admin-head">
+        <div class="section-title">
+          <div><p class="eyebrow">ADMIN</p><h2>数据管理</h2></div>
+          <div class="card-actions">
+            <button id="reload-data" class="secondary" type="button">重新读取本地数据</button>
+            <button id="refresh" class="primary" type="button">刷新来源（外网）</button>
+          </div>
+        </div>
+        <p class="hint">
+          此入口承接原有来源与导入、原文与证据、报告模板、运行状态与人工证据，旧能力未删除。
+          「刷新来源」会访问外网公开来源，属外网动作，仅在此处手动触发；业务页不提供外网刷新。
+        </p>
+        <nav class="subnav" id="admin-nav" role="tablist" aria-label="数据管理视图">
+          <button class="admin-tab" role="tab" id="atab-sources" aria-controls="admin-sources" aria-selected="true" data-admin="sources" tabindex="0">来源与导入</button>
+          <button class="admin-tab" role="tab" id="atab-records" aria-controls="admin-records" aria-selected="false" data-admin="records" tabindex="-1">原文与证据</button>
+          <button class="admin-tab" role="tab" id="atab-p1" aria-controls="admin-p1" aria-selected="false" data-admin="p1" tabindex="-1">人工证据</button>
+          <button class="admin-tab" role="tab" id="atab-report" aria-controls="admin-report" aria-selected="false" data-admin="report" tabindex="-1">报告模板</button>
+          <button class="admin-tab" role="tab" id="atab-runs" aria-controls="admin-runs" aria-selected="false" data-admin="runs" tabindex="-1">运行状态</button>
+        </nav>
+      </section>
+
+      <!-- 数据管理 · 来源与导入（旧 RSS 材料） -->
+      <div class="admin-view" id="admin-sources" role="tabpanel" aria-labelledby="atab-sources">
+        <section class="panel">
+          <p class="hint">
+            以下为旧 RSS 采集材料（/api/data）的统计与来源，分母为全表记录数，与人工候选**不是同一分母**，
+            不混为一组。业务页「采得原帖」只计人工候选身份。
+          </p>
+        </section>
+        <section class="stats" aria-label="全库统计">
+          <article><span>全表记录（分母）</span><strong id="stat-records">—</strong></article>
+          <article><span>规范记录数</span><strong id="stat-canonical">—</strong></article>
+          <article><span>未知时间</span><strong id="stat-unknown">—</strong></article>
+          <article><span>未知时间占比</span><strong id="stat-unknown-ratio">—</strong></article>
+          <article><span>来源数</span><strong id="stat-feeds">—</strong></article>
+          <article><span>列表已显示 / 上限</span><strong id="stat-shown">—</strong></article>
+        </section>
+
+        <section class="panel meta-panel">
+          <div class="section-title">
+            <div><p class="eyebrow">DATA CONTRACT</p><h2>数据契约与质量构成</h2></div>
+          </div>
+          <dl class="kv wide">
+            <dt>schema_version</dt><dd id="meta-schema">—</dd>
+            <dt>coverage</dt><dd id="meta-coverage">—</dd>
+            <dt>analysis_status</dt><dd id="meta-analysis">—</dd>
+            <dt>时间质量分布（全表）</dt><dd id="quality-dist">—</dd>
+            <dt>旧 items 待处理</dt><dd id="legacy-note">—</dd>
+          </dl>
+        </section>
+
+        <section class="grid">
+          <aside class="panel controls">
+            <div class="section-title"><div><p class="eyebrow">CONFIGURE</p><h2>监测设置</h2></div></div>
+
+            <form id="feed-form">
+              <label>来源名称
+                <input name="name" maxlength="100" placeholder="例如：公司新闻" required autocomplete="off">
+              </label>
+              <label>公开 RSS / Atom 地址
+                <input name="url" type="url" placeholder="https://example.com/feed.xml" required autocomplete="off">
+              </label>
+              <button class="primary full" type="submit">添加来源</button>
+            </form>
+
+            <form id="keyword-form">
+              <label>关注关键词（保存到本地配置）
+                <span class="hint">逗号或换行分隔；此配置保存在后端，与「原文与证据」的临时筛选相互独立。</span>
+                <textarea name="keywords" rows="4" placeholder="品牌名，产品名，竞争对手"></textarea>
+              </label>
+              <button class="secondary full" type="submit">保存关键词</button>
+            </form>
+
+            <form id="import-form">
+              <label>导入到来源
+                <span class="hint">POST /api/import；遵守 manual_limit，超出将被服务端拒绝（422）。</span>
+                <select id="import-feed" name="feed_id" required></select>
+              </label>
+              <label>JSON 记录数组
+                <span class="hint">每项至少含 title 与 url；可选 summary、source_id、published_at、raw_xml。仅允许这些字段。</span>
+                <textarea name="records" rows="7" placeholder='[
+  {"title": "示例标题", "url": "https://example.com/a", "summary": "示例摘要", "published_at": "2026-10-15T08:00:00Z"}
+]'></textarea>
+              </label>
+              <button class="secondary full" type="submit">导入所选来源的 JSON 记录</button>
+            </form>
+          </aside>
+
+          <section class="panel">
+            <div class="section-title">
+              <div><p class="eyebrow">SOURCES</p><h2>来源列表</h2></div>
+              <p class="hint" id="feeds-note">最后成功时间与最近批次来自 /api/data。</p>
+            </div>
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">名称</th><th scope="col">地址</th><th scope="col">条目数</th>
+                    <th scope="col">最后成功</th><th scope="col">最近批次</th><th scope="col">操作</th>
+                  </tr>
+                </thead>
+                <tbody id="feeds-body">
+                  <tr><td colspan="6" class="muted">尚未读取数据。</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </div>
+
+      <!-- 数据管理 · 原文与证据（旧 RSS 记录） -->
+      <div class="admin-view" id="admin-records" role="tabpanel" aria-labelledby="atab-records" hidden>
+        <section class="panel">
+          <div class="section-title">
+            <div><p class="eyebrow">FILTER</p><h2>筛选</h2></div>
+          </div>
+          <p class="hint">此视图属于旧 RSS 材料（/api/data），与「原帖检索」的人工证据是不同分母，不混为一组。</p>
+          <div class="filters">
+            <label>来源<select id="filter-source"><option value="all">全部来源</option></select></label>
+            <label>时间质量
+              <select id="filter-quality">
+                <option value="all">全部时间质量</option>
+                <option value="valid">时间格式有效（valid）</option>
+                <option value="missing">时间缺失（missing）</option>
+                <option value="invalid">时间非法（invalid）</option>
+                <option value="timezone_missing">缺时区（timezone_missing）</option>
+                <option value="legacy_unverified">旧数据未核验（legacy_unverified）</option>
+              </select>
+            </label>
+            <label>情感<select id="filter-sentiment">
+              <option value="all">全部情感</option>
+              <option value="偏正面">偏正面</option>
+              <option value="偏负面">偏负面</option>
+              <option value="中性/待判">中性/待判</option>
+            </select></label>
+            <label>关键词（临时筛选标题或摘要）
+              <input id="filter-keyword" type="search" placeholder="输入关键词，实时过滤当前列表" autocomplete="off">
+            </label>
+          </div>
+          <p class="hint" id="records-summary">尚未读取数据。</p>
+        </section>
+
+        <section class="panel">
+          <div class="section-title"><div><p class="eyebrow">RECORDS</p><h2>原文与规范记录</h2></div></div>
+          <div id="records" class="cards"></div>
+        </section>
+
+        <section class="panel" id="record-detail" hidden aria-live="polite">
+          <div class="section-title"><div><p class="eyebrow">EVIDENCE</p><h2>证据详情</h2></div>
+            <button id="record-close" class="secondary" type="button">关闭</button>
+          </div>
+          <div id="record-detail-body"></div>
+        </section>
+      </div>
+
+      <!-- 数据管理 · 人工证据（导入 + 管理状态） -->
+      <div class="admin-view" id="admin-p1" role="tabpanel" aria-labelledby="atab-p1" hidden>
+        <details class="panel" id="p1-import-panel" open>
+          <summary><span class="eyebrow">MANUAL IMPORT</span> 人工导入已取证证据</summary>
+          <p class="hint">
+            本页面不预填、不自动导入、不抓取、不调用模型。仅提交人工已取证的 records 数组（一次最多 3 条，
+            全库候选总数 ≤3）；提交后重新读取本地材料。post_body 为帖主正文，source_summary 为明确来源摘要；
+            禁止填评论／回复正文。
+          </p>
+          <label>已取证的 records 数组（仅粘贴数组本身，形如 [{...}]）
+            <textarea id="p1-import-records" rows="8" autocomplete="off" spellcheck="false"
+              placeholder="（在此粘贴人工已取证的 records 数组；本页面不预填、不自动导入）"></textarea>
+          </label>
+          <div class="card-actions">
+            <button id="p1-import-submit" class="primary" type="button">导入到本地证据库</button>
+            <span class="hint">只接受 {records:[...]}；失败时保留真实 HTTP 状态与响应体原文。</span>
+          </div>
+          <div id="p1-admin-status" class="admin-status" role="status" aria-live="polite"></div>
+        </details>
+      </div>
+
+      <!-- 数据管理 · 报告模板（旧未复核样本） -->
+      <div class="admin-view" id="admin-report" role="tabpanel" aria-labelledby="atab-report" hidden>
+        <section class="panel">
+          <p class="eyebrow">M3 · EVIDENCE WORKFLOW</p><h2>证据分析与人工复核</h2>
+          <p>仅限人工指定分组，不代表自动事件聚类。创建证据包会校验快照；生产模型未配置时明确阻塞，不发送请求。候选阈值未校准，基线不足不比较，不发送通知。</p>
+          <form id="analysis-form">
+            <label>人工分组 ID<input name="group_id" required maxlength="100" placeholder="例如 acceptance-m3"></label>
+            <label>记录 ID（每行一个，受当前批次限额约束）<textarea name="record_ids" required rows="3"></textarea></label>
+            <button type="submit" class="primary">创建证据包</button>
+          </form>
+          <button id="analysis-load" type="button" class="secondary">读取分析队列</button>
+          <div id="analysis-body" aria-live="polite">尚未读取分析队列。</div>
+        </section>
+        <section class="panel">
+          <div class="section-title"><div><p class="eyebrow">SAMPLE ONLY</p><h2>未复核样本报告模板</h2></div></div>
+          <p class="muted">
+            本视图只从当前已读取的 /api/data 键值拼装一份**未复核样本模板**，列出各来源与时间质量。
+            它不生成结论、不认定事件、不触发任何预警；自动事件聚类、可靠预警、外部通知与生产模型当前均未接入。
+          </p>
+          <div class="card-actions">
+            <button id="report-generate" class="primary" type="button">生成未复核模板</button>
+            <button id="report-copy" class="secondary" type="button">复制</button>
+          </div>
+          <label class="sr-only" for="report-out">生成的报告模板</label>
+          <textarea id="report-out" class="report-out" rows="22" readonly placeholder="点击“生成未复核模板”后在此显示纯文本报告。"></textarea>
+        </section>
+      </div>
+
+      <!-- 数据管理 · 运行状态 -->
+      <div class="admin-view" id="admin-runs" role="tabpanel" aria-labelledby="atab-runs" hidden>
+        <section class="panel">
+          <div class="section-title">
+            <div><p class="eyebrow">RUNTIME</p><h2>服务运行时（GET /api/runtime）</h2></div>
+            <button id="runtime-load" class="secondary" type="button">读取运行时信息</button>
+          </div>
+          <dl class="kv wide" id="runtime-body">
+            <dt>状态</dt><dd class="muted">尚未读取。点击上方按钮读取，仅回环诊断，不代表身份认证。</dd>
+          </dl>
+        </section>
+
+        <section class="panel">
+          <div class="section-title">
+            <div><p class="eyebrow">RUNS</p><h2>采集批次</h2></div>
+            <p class="hint">最多显示 100 条（接口上限）。点击批次 ID 查看详情 GET /api/runs/&lt;id&gt;。</p>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">批次ID</th><th scope="col">来源</th><th scope="col">类型</th><th scope="col">状态</th>
+                  <th scope="col">开始</th><th scope="col">结束</th><th scope="col">输入</th>
+                  <th scope="col">新增</th><th scope="col">重复</th><th scope="col">错误</th>
+                </tr>
+              </thead>
+              <tbody id="runs-body">
+                <tr><td colspan="10" class="muted">尚未读取数据。</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel" id="run-detail" hidden aria-live="polite">
+          <div class="section-title"><div><p class="eyebrow">RUN DETAIL</p><h2>批次详情</h2></div>
+            <button id="run-close" class="secondary" type="button">关闭</button>
+          </div>
+          <div id="run-detail-body"></div>
+        </section>
+
+        <section class="panel">
+          <div class="section-title"><div><p class="eyebrow">NOT CONNECTED</p><h2>未接入能力</h2></div></div>
+          <ul class="plain">
+            <li>事件聚类 / 事件 API：<b>未接入</b>（后端无对应接口，不编造事件）。</li>
+            <li>可靠预警 / 通知 / 推送：<b>未接入</b>（M3 仅提供未校准的质量与基线候选）。</li>
+            <li>模型调用与用量：<b>未接入</b>（情感标签为本地词典粗筛，不产生模型用量）。</li>
+            <li>批次取消 / 中止：<b>未接入</b>（无取消接口，只能等待批次结束）。</li>
+            <li>导出 / 删除 / 权限：<b>未接入</b>。</li>
+            <li>日期范围筛选 / 热度历史 / 观察清单（watchlist）：<b>已接入</b>（观测时间窗口筛选、同帖真实历史与人工观察清单，见业务页「观察清单」）。</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    情感与时间质量标签均为本地规则粗筛，属未复核提示，不代表准确结论。数据保存在本机。
+  </footer>
+
+  <!-- 原帖详情侧抽屉（业务用；不含 snapshot / 哈希 / 路径 / 字段名） -->
+  <div id="drawer" class="drawer" hidden aria-hidden="true">
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+      <div class="drawer-head">
+        <h2 id="drawer-title">原帖详情</h2>
+        <button id="drawer-close" class="secondary" type="button">关闭</button>
+      </div>
+      <div id="drawer-body" class="drawer-body"></div>
+    </aside>
+  </div>
+
+  <script src="/vendor/echarts/echarts.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</body>
+</html>

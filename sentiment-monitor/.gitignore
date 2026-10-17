@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+sentiment.db
+sentiment.db-*
+snapshots/

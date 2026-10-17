@@ -1,0 +1,146 @@
+Browser tab: 2, Title: "Agent Bridge · 本地控制台", URL: "http://127.0.0.1:8765/".
+0 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8765/
+	1 container
+		2 link Description: Agent Bridge 首页, Value: 127.0.0.1:8765/
+		3 text 工作区
+		4 button ◫ 任务总览 12, ID: navTasks
+			5 text ◫
+			6 text 任务总览
+			246 text 12
+		8 text 仅本机可访问 127.0.0.1 · 不对局域网开放 AB Agent Bridge Demo 本地执行 · 人工验收
+	9 container
+		10 container
+			11 text 工作区  / 任务总览
+		247 text 本地连接
+		13 button ↻, Help: 刷新任务, ID: refreshButton
+		14 button ＋ 新建任务, ID: newTaskButton
+			15 text ＋
+			16 text 新建任务
+		17 text 执行与审查
+		18 heading 任务控制台, Value: 1
+			19 text 任务控制台
+		20 text 在这里查看桥状态、审阅计划，并按任务逐项批准执行与验收。
+		21 text LOOPBACK
+		22 text 数据留在本机
+		23 container metrics
+			248 container
+				249 text 任务总数 ◫ 12 本地任务记录
+			250 container
+				251 text 正在执行 ↗ 0 桥持有的执行任务
+			252 container
+				253 text 等待审查 ◇ 12 需要人工查看
+			254 container
+				255 text 验收阻塞 ! 12 证据不足或待操作
+		32 container 任务协同图
+			33 heading 任务协同图, Value: 2, ID: graphHeading
+				34 text 任务协同图
+			35 text 节点为真实任务；边仅来自 task.dependencies（当前尝试，非完整历史）
+			256 text 已连接 · 最后成功刷新 2026/10/15 22:24:14
+			37 container Description: 任务依赖关系图；下方提供等价文本列表, ID: taskGraph
+			38 container
+				39 button (expanded) 任务文本列表（可访问，与搜索同步过滤）, Secondary Actions: Collapse
+					40 text 任务文本列表（可访问，与搜索同步过滤）
+				41 content list graphList
+					261 container
+						262 button opencode-readme-update-20261015
+						263 text 待审查 验收：阻塞 模型：opencode-go/deepseek-v4.1-flash
+			78 container graphNote
+				260 text 来源：GET /api/tasks（每条为当前尝试，非完整历史） 暂无依赖记录（依赖边仅来自 task.dependencies）。
+		80 heading 任务, Value: 2
+			81 text 任务
+		82 text 状态从桥的本地记录读取
+		83 container
+			84 text ⌕
+			85 search text field (settable) ⌕, Value: opencode-readme-update-20261015, ID: searchInput
+		86 table
+			87 row
+				88 cell
+					89 text 任务
+				90 cell
+					91 text 执行器
+				92 cell
+					93 text 状态
+				94 cell
+					95 text 最近更新
+			264 row
+				265 cell
+					266 text 仅更新 README.md。先完整阅读 README.md，并只读 adapters.py 确认桥命令。保留原有操作命令和边界，修正文档中“真实模型尚未执行”“控制台未经过真实浏览器验收”等过时表述，增加“2026-10-15 真实桥验收与客户端查找”小节。已核实事实：OpenCode V2 Console Personal 工作区连接保持不变；桥实际 run --standalone --format json --model opencode-go/deepseek-v4.1-flash，在每任务独立 detached worktree 工作，并非接到用户当前桌面会话；真实浏览器控制台 http://127.0.0.1:8765 已走完新建、计划、确认、启动和结果显示；任务 ui-real-opencode-20261015-1238 退出0，唯一产物 reports/frontend-receipt.md 三行内容和哈希一致；对应本机OpenCode会话 ses_ec223cfa2ffeQ7YYrHaxg1qiPZ 已从本机数据库关联。客户端当前列表不显示的原因尚未用GUI对照实证，不能保证自动出现或指定打开方式。桥 result 的 session_id、usage、upstream_requests 仍为null。浏览器安全审批拒绝了审查文件上传，任务待审查、整体BLOCKED，不能绕过安全审批。取消、修订和复杂项目尚未验收。建议在文档列出查找信息应包含任务ID、attempt、工作目录和session ID，前端联动客户端仍需实现与验收。不要联网、不要发起额外模型探测、不要读认证文件、不要运行shell命令或测试、不要创建子代理、不改其他文件。完成后简短说明文档改动。
+					267 text opencode-readme-update-20261015 · r1
+				268 cell
+					269 text opencode
+				270 cell
+					271 text 待审查
+				272 cell
+					273 text 10/15 12:53
+				274 cell
+					275 text ›
+		241 container detailPanel
+			276 heading Value: 2, 仅更新 README.md。先完整阅读 README.md，并只读 adapters.py 确认桥命令。保留原有操作命令和边界，修正文档中“真实模型尚未执行”“控制台未经过真实浏览器验收”等过时表述，增加“2026-10-15 真实桥验收与客户端查找”小节。已核实事实：OpenCode V2 Console Personal 工作区连接保持不变；桥实际 run --standalone --format json --model opencode-go/deepseek-v4.1-flash，在每任务独立 detached worktree 工作，并非接到用户当前桌面会话；真实浏览器控制台 http://127.0.0.1:8765 已走完新建、计划、确认、启动和结果显示；任务 ui-real-opencode-20261015-1238 退出0，唯一产物 reports/frontend-receipt.md 三行内容和哈希一致；对应本机OpenCode会话 ses_ec223cfa2ffeQ7YYrHaxg1qiPZ 已从本机数据库关联。客户端当前列表不显示的原因尚未用GUI对照实证，不能保证自动出现或指定打开方式。桥 result 的 session_id、usage、upstream_requests 仍为null。浏览器安全审批拒绝了审查文件上传，任务待审查、整体BLOCKED，不能绕过安全审批。取消、修订和复杂项目尚未验收。建议在文档列出查找信息应包含任务ID、attempt、工作目录和session ID，前端联动客户端仍需实现与验收。不要联网、不要发起额外模型探测、不要读认证文件、不要运行shell命令或测试、不要创建子代理、不改其他文件。完成后简短说明文档改动。
+				277 text 仅更新 README.md。先完整阅读 README.md，并只读 adapters.py 确认桥命令。保留原有操作命令和边界，修正文档中“真实模型尚未执行”“控制台未经过真实浏览器验收”等过时表述，增加“2026-10-15 真实桥验收与客户端查找”小节。已核实事实：OpenCode V2 Console Personal 工作区连接保持不变；桥实际 run --standalone --format json --model opencode-go/deepseek-v4.1-flash，在每任务独立 detached worktree 工作，并非接到用户当前桌面会话；真实浏览器控制台 http://127.0.0.1:8765 已走完新建、计划、确认、启动和结果显示；任务 ui-real-opencode-20261015-1238 退出0，唯一产物 reports/frontend-receipt.md 三行内容和哈希一致；对应本机OpenCode会话 ses_ec223cfa2ffeQ7YYrHaxg1qiPZ 已从本机数据库关联。客户端当前列表不显示的原因尚未用GUI对照实证，不能保证自动出现或指定打开方式。桥 result 的 session_id、usage、upstream_requests 仍为null。浏览器安全审批拒绝了审查文件上传，任务待审查、整体BLOCKED，不能绕过安全审批。取消、修订和复杂项目尚未验收。建议在文档列出查找信息应包含任务ID、attempt、工作目录和session ID，前端联动客户端仍需实现与验收。不要联网、不要发起额外模型探测、不要读认证文件、不要运行shell命令或测试、不要创建子代理、不改其他文件。完成后简短说明文档改动。
+			278 text opencode-readme-update-20261015 · revision 1
+			279 button ×, Help: 关闭, ID: detailClose
+			280 text 状态 待审查 执行器 · 模型
+			281 text opencode · opencode-go/deepseek-v4.1-flash
+			282 text 验收（独立）
+			283 text 阻塞
+			284 text 最后更新
+			285 text 10/15 12:53
+			286 heading 任务目标, Value: 3
+				287 text 任务目标
+			288 text 仅更新 README.md。先完整阅读 README.md，并只读 adapters.py 确认桥命令。保留原有操作命令和边界，修正文档中“真实模型尚未执行”“控制台未经过真实浏览器验收”等过时表述，增加“2026-10-15 真实桥验收与客户端查找”小节。已核实事实：OpenCode V2 Console Personal 工作区连接保持不变；桥实际 run --standalone --format json --model opencode-go/deepseek-v4.1-flash，在每任务独立 detached worktree 工作，并非接到用户当前桌面会话；真实浏览器控制台 http://127.0.0.1:8765 已走完新建、计划、确认、启动和结果显示；任务 ui-real-opencode-20261015-1238 退出0，唯一产物 reports/frontend-receipt.md 三行内容和哈希一致；对应本机OpenCode会话 ses_ec223cfa2ffeQ7YYrHaxg1qiPZ 已从本机数据库关联。客户端当前列表不显示的原因尚未用GUI对照实证，不能保证自动出现或指定打开方式。桥 result 的 session_id、usage、upstream_requests 仍为null。浏览器安全审批拒绝了审查文件上传，任务待审查、整体BLOCKED，不能绕过安全审批。取消、修订和复杂项目尚未验收。建议在文档列出查找信息应包含任务ID、attempt、工作目录和session ID，前端联动客户端仍需实现与验收。不要联网、不要发起额外模型探测、不要读认证文件、不要运行shell命令或测试、不要创建子代理、不改其他文件。完成后简短说明文档改动。
+			289 heading 允许修改, Value: 3
+				290 text 允许修改
+			291 text README.md
+			292 button 提交只读审查
+			293 button 修订契约
+			294 text 详情为 state.current_attempt 的当前尝试，不是完整历史。启动会新增 worktree 并运行新执行器，可能调用模型；桥未实证原生请求数量和预算限制。
+			295 heading 最近执行输出, Value: 3
+				296 text 最近执行输出
+			297 text step_finish
+
+text · Now update the console section and add the new section after it.
+
+tool_use · edit · completed
+
+step_finish
+
+tool_use · edit · completed
+
+step_finish
+
+tool_use · edit · completed
+
+step_finish
+
+text · 修改完成，重新通读以核对一致性。
+
+tool_use · read · completed
+
+step_finish
+
+text · 已完成，仅修改 `README.md` 一个文件。原命令、边界与结构全部保留。
+
+## 实际改动
+
+1. **开头导语（第 3 行）**：删去“真实模型…验收均为 BLOCKED”的过时总述，改为“2026-10-15 已用真实 OpenCode 模型完成一次真实桥运行”，并明确**取消、修订、复杂项目和用户路径验收仍 BLOCKED、整体仍 BLOCKED**；补充“每任务独立的 detached worktree”。
+2. **本机入口与边界（第 9 行）**：保留 OpenCode 命令原文，补一句本次实跑模型为 `opencode-go/deepseek-v4.1-flash`（与 `adapters.py` 中的 `run --standalone --format json --model provider/model` 一致）。
+3. **本地浏览器控制台（第 27 行）**：把“控制台还未经过真实浏览器路径验收”改为已在真实浏览器 `http://127.0.0.1:8765` 走完新建、计划、确认、启动和结果显示；同时保留“取消、修订、复杂项目页面路径尚未验收、客户端可见性未实证、不能替代独立审查”的边界。
+4. **新增小节《2026-10-15 真实桥验收与客户端查找》**（第 29–41 行），包含：桥实际命令、**桥在任务自己的 detached worktree 运行、不接入当前桌面 OpenCode 会话**、控制台走完、任务 `ui-real-opencode-20261015-1238` 退出 0 且唯一产物 `reports/frontend-receipt.md` 三行内容与哈希一致、本机会话 `ses_ec223cfa2ffeQ7YYrHaxg1qiPZ` 由本机数据库关联；并写明**客户端查找信息应含任务 ID、attempt、工作目录、session ID**，但客户端列表可见性尚未 GUI 对照实证、不能保证自动出现或指定打开方式，前端联动仍需实现与验收；末尾保留 result 的 `session_id`/`usage`/`upstream_requests` 仍为 null、安全审批拒绝审查文件上传导致待审查整体 BLOCKED、不能绕过审批、取消/修订/复杂项目未验收。
+5. **结果、修订和人工验收（第 98 行）**：把“OpenCode JSON 事件格式尚未通过真实输出核对”更新为“已捕获真实 JSON 输出，但桥未解析出 session_id/usage/upstream_requests，仍为 null，本机会话只能经本机数据库关联”，并指向新小节。
+6. **手动验证（第 126 行）**：把“真实任务、取消和用户验收仍需证据”改为“真实任务已跑通一次，但取消、修订、复杂项目和用户验收仍需各自证据”。
+
+## 未执行的验证
+- 未运行任何命令/测试（含 `git status`、`git diff --stat`），故无法给出差异统计；文档改动以逐处精确替换完成，已通读全文核对。
+- 未联网、未做模型探测、未读取认证文件、未创建子代理、未改其他文件。
+
+## 阻塞
+- 契约文件 `C:\Users\Lenovo\Documents\Codex\bridge-work\data\tasks\opencode-readme-update-20261015\contract.r1.json` 位于工作区外，读取被权限拒绝。我依据本工作区内 `README.md` 与 `adapters.py` 以及你在任务中列出的事实完成改动；如契约另有硬性条款，请提供工作区内可读副本以便比对。
+			298 heading 机器结果 · 阻塞, Value: 3
+				299 text 机器结果 · 阻塞
+			300 text 退出码：0
+状态：待审查
+变更文件：README.md
+		244 text shared-session-graph-20261015 · PID 37472 · bridge 97e3a87d5012
+		245 text 执行前逐项批准 · 结果由人审查
+
+The focused UI element is 0 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8765/

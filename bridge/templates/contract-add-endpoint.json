@@ -1,0 +1,22 @@
+{
+  "_template": "add-endpoint —— 给采集器加平台端点（基于 S1-B/S1-C 的真实教训）",
+  "title": "{{TITLE}}",
+  "opencode_mode": "standalone",
+  "task_id": "{{TASK_ID}}",
+  "goal": "【复用优先——硬要求】先复用，再考虑自己写：① 复用仓库里已有的 `tools/collect_opencli.py`（`ENDPOINTS` 声明式表：argv/feed_url/platform/fields）；② 复用本机 OpenCLI 适配器（只允许 access=read）；③ 复用 `storage.py` 既有函数；④ 以上都不覆盖时才新写，并写明为什么不复用。只读硬约束：禁止任何写动作（发布/评论/点赞/关注/删除），禁止绕过登录与风控，禁止复制 cookie。失败不许静默降级。单次 ≤50 条。\n\n【本次交付】在 `ENDPOINTS` 表里新增：{{ENDPOINT_NAMES}}（对应命令 {{ENDPOINT_ARGS}}）。要求：\\n1. 沿用声明式结构（argv + feed_url + platform + fields + summary_empty_when_same_as_title），不写 if/else；\\n2. 逐源写清字段映射（注意：微博条目没有 `title`，要用 `word`；热榜条目通常没有发布时间）；缺字段留空**不猜**；\\n3. 若某平台实测不可用，**不得**塞进端点表——只在文档里记为「不可用 + 真实错误原文 + 未实证」；\\n4. 保持已有端点行为不变。\n\n【交付前必跑自检（离线、0 上游请求）】在 worktree 根目录执行：\\n`python -B \"{{SELFCHECK}}\" --kind endpoint --worktree . --allow \"{{ALLOW}}\" --artifacts \"{{ARTIFACTS}}\"`\\n必须得到 `verdict=pass`；把它的完整 JSON 输出贴进交付说明。若失败，**先修到 pass 再交付**。\n\n【必须的真实验证】\\n1. 每个新端点跑一次 `--dry-run --limit 3`（三次之间间隔 ≥30 秒），贴真实 stdout 或真实错误码与原文；\\n2. 如涉及冷却/限流：用 `--throttle-file` 指向临时文件，证明冷却中 `request_count=0`、`reason=throttled`；\\n3. **不要**为了凑证据去反复打真实平台；本轮真实上游请求数请在交付说明里如实写出。",
+  "repo": "{{REPO}}",
+  "executor": "opencode",
+  "model": "{{MODEL}}",
+  "allowed_paths": ["tools/", "docs/"],
+  "artifacts": ["tools/collect_opencli.py", "docs/S1-collector.md"],
+  "input_refs": ["tools/collect_opencli.py", "storage.py"],
+  "anchors": ["tools/collect_opencli.py:1"],
+  "completion_criteria": [
+    "只改 tools/ 与 docs/ 下的文件，其它文件零改动",
+    "新端点用声明式表实现；逐源字段映射写清，缺字段留空不猜",
+    "不可用的平台不得入端点表，只能记为不可用 + 真实错误原文",
+    "交付前自检 selfcheck.py --kind endpoint 必须 verdict=pass，且完整 JSON 已贴出",
+    "每个新端点真跑过 --dry-run --limit 3，真实输出已贴出；未超频打平台"
+  ],
+  "timeout_seconds": 900
+}

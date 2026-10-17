@@ -1,0 +1,77 @@
+{
+  "runtime": {
+    "pid": 37472,
+    "started_at": "2026-10-15T14:23:47.529039+00:00",
+    "store": "C:\\Users\\Lenovo\\Documents\\Codex\\bridge-work\\data",
+    "loaded_sha256": {
+      "bridge": "97e3a87d5012fdec18a6d2f1e8ace8f64cc37cc47d9b880abf0f89858dcb310d",
+      "adapters": "86cd5732a66724cb8ad9ff734d4f5d67212676a5f78c24cd8a2e327726d38fce",
+      "webui.py": "c92657e9095f7293201acdb29eeab5a06a323c0666429ce8ba2efc145baac991",
+      "web/app.js": "5c39b3ad3b020e09a9da0f7ac5940c8de1175106ccf78c21bd4adb0bca38a2c1",
+      "web/index.html": "42dd74918382a118049f21e4ea5a3a27ca66f2a7e60c06c5f01380f9d83fb5c9",
+      "web/style.css": "f58fede9628baeb24df87a0c1119f675fe6b45a6be2c3fb991fdc869ce4f1463",
+      "web/task-graph.js": "c5c82857bb4ba13753420968f59d1ebf7c66d9b01d2c1221b13922afa38074ce",
+      "web/vendor/cytoscape.min.js": "5f3b5b529546d5af1fc5628590af033b74511a5b6f789f5f4682845863228b91"
+    },
+    "bridge_module": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b2\\release\\agent-bridge.pyz\\bridge.py",
+    "build": "shared-session-graph-20261015"
+  },
+  "process": {
+    "ProcessId": 37472,
+    "CreationDate": "2026-10-15T22:23:47.385915+08:00",
+    "ExecutablePath": "C:\\Users\\Lenovo\\.workbuddy\\binaries\\python\\versions\\3.13.12\\python.exe",
+    "CommandLine": "\"C:\\Users\\Lenovo\\.workbuddy\\binaries\\python\\versions\\3.13.12\\python.exe\" -X utf8 -B \"C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b2\\release\\webui.py\" --limit 3 --store \"C:\\Users\\Lenovo\\Documents\\Codex\\bridge-work\\data\" --port 8765"
+  },
+  "routes_match": {
+    "/": true,
+    "/app.js": true,
+    "/style.css": true,
+    "/task-graph.js": true,
+    "/vendor/cytoscape.min.js": true
+  },
+  "archive_source_runtime_bridge_match": true,
+  "tasks": 12,
+  "statuses": [
+    "awaiting_review",
+    "awaiting_user"
+  ],
+  "acceptances": [
+    "BLOCKED"
+  ],
+  "edge_count": 0,
+  "titleless_ids": [
+    "opencode-go-fullchain-docs-r3",
+    "opencode-readme-update-20261015",
+    "ui-real-opencode-20261015-1238"
+  ],
+  "images": [
+    {
+      "file": "ui-delivery.jpg",
+      "mime": "image/jpeg",
+      "sha256": "4b5bae6ca8be2d41b8bfddb5e84e78ae332c70072e34aa74e60f4d986f01f998"
+    },
+    {
+      "file": "ui-titleless-detail.jpg",
+      "mime": "image/jpeg",
+      "sha256": "f461c8d994af6d7211a54a5ce28ebf1f6f2a0e1db45758564d4e993ff241d0b6"
+    }
+  ],
+  "gui_observations": {
+    "full_id_visible_in_list": true,
+    "no_dependencies_note_visible": true,
+    "full_id_list_click_opened_correct_detail": true,
+    "evidence": [
+      "ui-final.txt",
+      "ui-titleless-detail.txt",
+      "ui-delivery.jpg",
+      "ui-titleless-detail.jpg"
+    ]
+  },
+  "limits": [
+    "只有记录中的2种任务状态，全部验收BLOCKED；十标签映射不等于十状态真实触发",
+    "真实记录无依赖边，有边布局未实机覆盖",
+    "此前独立完整视觉验收BLOCKED不因单张截图改成PASS",
+    "用户报告npm integrity匹配；本轮无外网请求，原始metadata未归档"
+  ],
+  "model_requests": 0
+}

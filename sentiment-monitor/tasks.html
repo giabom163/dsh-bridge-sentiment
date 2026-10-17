@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>任务流水线 · 舆情观察台</title>
+  <style>
+    /* 自包含页面：复用 style.css 的类名与配色，只内联本页需要的规则，不依赖 app.js。 */
+    :root {
+      --ink: #17211f;
+      --bg: #f4f5f1;
+      --panel: #ffffff;
+      --line: #e7eae5;
+      --line-soft: #edf0ec;
+      --muted: #7c8580;
+      --accent: #0f6b8a;
+      --accent-strong: #0b5570;
+      --accent-soft: #e7f1f6;
+      --accent-line: #9cc2d6;
+      --danger: #ad4641;
+      --warn: #9a5a27;
+      --ok: #317a4d;
+      font-family: "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.5; }
+    a { color: var(--accent); }
+    a:hover { text-decoration: underline; }
+    .skip { position: absolute; left: -9999px; top: 0; background: var(--accent); color: #fff; padding: 10px 14px; border-radius: 0 0 10px 0; z-index: 10; }
+    .skip:focus { left: 0; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand-logo { width: 26px; height: 26px; color: var(--accent); flex: 0 0 auto; }
+    .brand-tag { font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
+    .top { max-width: 1280px; margin: auto; padding: 40px 32px 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+    .eyebrow { font-size: 10px; letter-spacing: 0.16em; color: #5b8ea6; margin: 0 0 10px; text-transform: uppercase; }
+    h1 { font-size: clamp(30px, 4vw, 46px); letter-spacing: -0.04em; line-height: 1.05; margin: 0; }
+    h2 { font-size: 19px; margin: 0; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); margin: 12px 0 0; font-size: 14px; }
+    .top-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+    .tab { display: inline-block; border: 1px solid var(--line); background: var(--panel); border-radius: 999px; padding: 9px 16px; font: 600 13px inherit; font-family: inherit; color: #3d4a45; text-decoration: none; }
+    .tab:hover { border-color: var(--accent-line); color: var(--accent-strong); text-decoration: none; }
+    .tab.weak { background: transparent; border-color: var(--line-soft); color: var(--muted); font-weight: 500; }
+    .secondary { border: 0; border-radius: 10px; padding: 11px 16px; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; background: var(--accent-soft); color: var(--accent-strong); }
+    .secondary:hover { background: #d6e9f2; }
+    button:focus-visible, a:focus-visible, .task-row:focus-visible { outline: 2px solid #5b9cbd; outline-offset: 2px; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin: 0 auto 16px; max-width: 1216px; }
+    .section-title { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0 10px; }
+    .stats article { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; min-width: 0; }
+    .stats span { display: block; font-size: 12px; color: var(--muted); }
+    .stats strong { display: block; font-size: 24px; letter-spacing: -0.03em; margin-top: 6px; overflow-wrap: anywhere; }
+    .biz-status { margin-top: 12px; font-size: 12.5px; color: #4d5a61; overflow-wrap: anywhere; }
+    .biz-status.error { color: var(--danger); }
+    .biz-status.ok { color: var(--ok); }
+    .hint { display: block; font-weight: 400; color: #838b87; margin-top: 6px; font-size: 11px; line-height: 1.5; overflow-wrap: anywhere; }
+    .muted { color: var(--muted); }
+    .error-text { color: var(--danger); overflow-wrap: anywhere; font-size: 12px; }
+    .table-wrap { overflow-x: auto; margin-top: 12px; }
+    .table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 900px; }
+    .table th, .table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line-soft); vertical-align: top; overflow-wrap: anywhere; }
+    .table th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+    .table code { font-size: 11px; overflow-wrap: anywhere; }
+    .table td.num { font-variant-numeric: tabular-nums; }
+    .chip { background: #f1f3f0; color: #5c6660; border-radius: 999px; padding: 3px 9px; font-size: 11px; white-space: nowrap; }
+    .chip.ok { background: #e7f5ec; color: var(--ok); }
+    .chip.warn { background: #fbf3e8; color: var(--warn); }
+    .chip.bad { background: #fcebea; color: var(--danger); }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 4px; font-size: 11px; color: var(--muted); }
+    .task-row { cursor: pointer; }
+    .task-row:hover td { background: #f7fafb; }
+    .task-row[aria-expanded="true"] td { background: #eef5f8; }
+    .detail-row td { background: #fbfcfb; }
+    pre.json { background: #f7f8f5; border: 1px solid var(--line-soft); border-radius: 10px; padding: 12px; font-size: 11.5px; line-height: 1.55; max-height: 420px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; margin: 0; }
+    footer { max-width: 1216px; margin: 0 auto; padding: 8px 32px 36px; color: #919994; font-size: 11px; }
+    @media (max-width: 760px) {
+      .top { padding: 28px 16px 16px; flex-direction: column; align-items: flex-start; }
+      .top-actions { align-items: flex-start; }
+      .panel { margin: 0 12px 12px; padding: 16px 14px; border-radius: 12px; }
+      .stats { grid-template-columns: 1fr; }
+      footer { padding: 8px 16px 28px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">跳到主内容</a>
+
+  <header class="top">
+    <div class="brand">
+      <svg class="brand-logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M2 13h3.2l1.8-6 3 12 2.6-9 1.8 3H22" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>任务流水线</h1>
+      <span class="brand-tag">独立进程 :8791</span>
+    </div>
+    <div class="top-actions">
+      <p class="sub">全部桥 store 只读汇总 · 数据取自 state.json / attempt.json / result.json</p>
+      <a class="tab" href="http://127.0.0.1:8790/">← 舆情观察台（:8790）</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="panel">
+      <div class="section-title">
+        <div><p class="eyebrow">SUMMARY</p><h2>汇总</h2></div>
+        <div class="card-actions">
+          <button id="reload" class="secondary" type="button">立即刷新</button>
+          <span id="updated" class="muted">尚未读取</span>
+        </div>
+      </div>
+      <div id="status" class="biz-status" role="status" aria-live="polite">正在读取任务…</div>
+      <div class="stats" id="stats" hidden>
+        <article><span>store 数</span><strong id="stat-stores">—</strong></article>
+        <article><span>任务数</span><strong id="stat-tasks">—</strong></article>
+        <article><span>读取失败的 store</span><strong id="stat-errors">—</strong></article>
+      </div>
+      <p class="chips" id="stat-statuses"></p>
+      <p class="hint" id="scope">正在读取已注册范围…</p>
+      <p class="hint">每 20 秒自动刷新；点击任意行展开该任务的 attempt / result 摘要。本页只读，不写 store、不写数据库、不触发采集。</p>
+    </section>
+
+    <div id="stores"></div>
+  </main>
+
+  <footer>只读页面：/api/tasks 与 /api/tasks/&lt;store&gt;/&lt;task&gt;。缺失的 store 会单独标出错误，不影响其它 store。</footer>
+
+  <script>
+    "use strict";
+    const REFRESH_MS = 20000;
+    const DETAIL_LIMIT = 40000;
+    // 详情缓存：key -> { version, data?, error?, pending, token }，绑定 task + attempt + detail_version。
+    const detailCache = new Map();
+    const expanded = new Set();
+    let lastContent = null;
+    let requestSeq = 0;
+    let busy = false;
+
+    const $ = (selector) => document.querySelector(selector);
+
+    function el(tag, cls, text) {
+      const node = document.createElement(tag);
+      if (cls) node.className = cls;
+      if (text !== undefined && text !== null) node.textContent = String(text);
+      return node;
+    }
+
+    function pad(value) {
+      return String(value).padStart(2, "0");
+    }
+
+    function stamp(date) {
+      const value = date || new Date();
+      return value.getFullYear() + "-" + pad(value.getMonth() + 1) + "-" + pad(value.getDate()) +
+        " " + pad(value.getHours()) + ":" + pad(value.getMinutes()) + ":" + pad(value.getSeconds());
+    }
+
+    function fmt(value) {
+      if (!value) return "—";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      return stamp(date);
+    }
+
+    function statusClass(status) {
+      if (status === "accepted") return "chip ok";
+      if (status === "awaiting_review" || status === "awaiting_user" || status === "rework") return "chip warn";
+      if (status === "failed" || status === "stop_unconfirmed") return "chip bad";
+      return "chip";
+    }
+
+    function keyOf(row) {
+      return row.dataset.key + "/" + row.dataset.id;
+    }
+
+    function findRow(key) {
+      for (const row of document.querySelectorAll("tr.task-row")) {
+        if (keyOf(row) === key) return row;
+      }
+      return null;
+    }
+
+    // 忽略 updated_at：服务端每次请求都会刷新该字段，不能据此判定内容变化。
+    // 是否重绘只由任务真实内容（含 detail_version）决定。
+    function contentSignature(data) {
+      const stores = Array.isArray(data.stores) ? data.stores : [];
+      return JSON.stringify(stores.map((store) => ({
+        key: store.key,
+        label: store.label,
+        path: store.path,
+        error: store.error || null,
+        tasks: (Array.isArray(store.tasks) ? store.tasks : []).map((task) => ({
+          id: task.id,
+          status: task.status,
+          acceptance: task.acceptance,
+          revision: task.revision,
+          product_review: task.product_review,
+          human: task.human,
+          human_dismissed: !!task.human_dismissed,
+          attempt: task.attempt,
+          started: task.started,
+          finished: task.finished,
+          cost: task.cost,
+          detail_version: task.detail_version || null
+        }))
+      })));
+    }
+
+    // 撤销打回：dismissed 不是有效 reject，按 已撤销/待接收 展示。
+    function humanLabel(task) {
+      if (task.human_dismissed) return "已撤销/待接收";
+      return task.human || "—";
+    }
+
+    function clear(node) {
+      while (node.firstChild) node.removeChild(node.firstChild);
+    }
+
+    function detailRowFor(row, create) {
+      const next = row.nextElementSibling;
+      if (next && next.classList.contains("detail-row")) return next;
+      if (!create) return null;
+      const tr = el("tr", "detail-row");
+      const td = el("td");
+      td.colSpan = 7;
+      tr.append(td);
+      row.after(tr);
+      return tr;
+    }
+
+    function fillDetail(tr, key, version) {
+      const td = tr.firstElementChild;
+      clear(td);
+      const cached = detailCache.get(key);
+      if (!cached || cached.version !== version || cached.pending) {
+        td.append(el("p", "hint", "正在读取任务详情…"));
+        return;
+      }
+      if (cached.error) {
+        td.append(el("p", "error-text", "任务详情读取失败：" + cached.error));
+        const retry = el("button", "secondary", "重试读取详情");
+        retry.type = "button";
+        retry.addEventListener("click", () => fetchDetail(key, version, true));
+        td.append(retry);
+        return;
+      }
+      const body = cached.data || {};
+      const attempt = body.attempt || {};
+      const result = body.result || {};
+      const state = body.state || {};
+      const human = state.human_accept || {};
+      const cost = result.native_cost;
+      const summary = [
+        "attempt " + (attempt.attempt_id || state.current_attempt || "—"),
+        "executor " + (attempt.executor || "—"),
+        "exit_code " + (result.exit_code === undefined || result.exit_code === null ? "—" : result.exit_code),
+        // 当前验收以 state 为准；result 里的值只是执行结束时的历史记录。
+        "acceptance(state) " + (state.acceptance || "—"),
+        "执行结束时记录 result.acceptance " + (result.acceptance || "—"),
+        "human_accept " + (human.decision ? (human.dismissed ? human.decision + "（已撤销/待接收）" : human.decision) : "—"),
+        "native_cost " + (cost === undefined || cost === null ? "null" : "已记录")
+      ];
+      td.append(el("p", "hint", summary.join(" · ")));
+      let text;
+      try {
+        text = JSON.stringify(body, null, 2);
+      } catch (err) {
+        text = String(err);
+      }
+      if (text.length > DETAIL_LIMIT) text = text.slice(0, DETAIL_LIMIT) + "\n…（已截断，完整内容请直接读取 store 文件）";
+      td.append(el("pre", "json", text));
+    }
+
+    // 详情请求绑定 key + version：同版本不重复并发；旧响应不覆盖新版本；
+    // 失败项不在自动路径重试（retry 只能由用户手动触发），避免无限重试。
+    async function fetchDetail(key, version, retry) {
+      const cached = detailCache.get(key);
+      if (cached && cached.pending && cached.version === version) return;
+      if (!retry && cached && cached.version === version && (cached.data || cached.error)) return;
+      const token = ++requestSeq;
+      detailCache.set(key, { version: version, pending: true, token: token });
+      const parts = key.split("/");
+      const url = "/api/tasks/" + parts.map(encodeURIComponent).join("/");
+      let record;
+      try {
+        const response = await fetch(url, { cache: "no-store" });
+        const body = await response.json();
+        if (!response.ok) throw new Error((body && body.error) || ("HTTP " + response.status));
+        record = { version: version, data: body };
+      } catch (err) {
+        record = { version: version, error: (err && err.message) || String(err) };
+      }
+      const current = detailCache.get(key);
+      if (!current || current.token !== token) return;
+      detailCache.set(key, record);
+      if (!expanded.has(key)) return;
+      const row = findRow(key);
+      if (!row || (row.dataset.version || "") !== version) return;
+      const tr = detailRowFor(row, true);
+      tr.hidden = false;
+      fillDetail(tr, key, version);
+    }
+
+    function toggleRow(row) {
+      const key = keyOf(row);
+      const version = row.dataset.version || "";
+      if (expanded.has(key)) {
+        expanded.delete(key);
+        row.setAttribute("aria-expanded", "false");
+        const tr = detailRowFor(row, false);
+        if (tr) tr.hidden = true;
+        return;
+      }
+      expanded.add(key);
+      row.setAttribute("aria-expanded", "true");
+      const tr = detailRowFor(row, true);
+      tr.hidden = false;
+      const cached = detailCache.get(key);
+      // 命中当前版本的成功缓存直接渲染；否则先占位再请求。失败的详情只能手动刷新/点重试。
+      if (cached && cached.version === version && cached.data) {
+        fillDetail(tr, key, version);
+      } else {
+        fillDetail(tr, key, version);
+        fetchDetail(key, version, false);
+      }
+    }
+
+    // 手动刷新时清掉失败项，让展开项重新读取；成功项与版本不变项继续复用。
+    function retryFailedDetails() {
+      for (const key of [...detailCache.keys()]) {
+        const cached = detailCache.get(key);
+        if (cached && cached.error) detailCache.delete(key);
+      }
+    }
+
+    function taskTable(store) {
+      const wrap = el("div", "table-wrap");
+      const table = el("table", "table");
+      const head = el("thead");
+      const headRow = el("tr");
+      for (const label of ["任务 ID", "状态", "接收", "产品意见", "人工", "开始", "结束"]) {
+        headRow.append(el("th", null, label));
+      }
+      head.append(headRow);
+      const body = el("tbody");
+      for (const task of store.tasks) {
+        const key = store.key + "/" + task.id;
+        const row = el("tr", "task-row");
+        row.dataset.key = store.key;
+        row.dataset.id = task.id;
+        row.dataset.version = task.detail_version || "";
+        row.tabIndex = 0;
+        row.setAttribute("role", "button");
+        row.setAttribute("aria-expanded", expanded.has(key) ? "true" : "false");
+
+        const idCell = el("td");
+        idCell.append(el("code", null, task.id));
+        row.append(idCell);
+
+        const statusCell = el("td");
+        statusCell.append(el("span", statusClass(task.status), task.status || "未知"));
+        row.append(statusCell);
+
+        row.append(el("td", null, task.acceptance || "—"));
+        row.append(el("td", null, task.product_review || "—"));
+        row.append(el("td", null, humanLabel(task)));
+        row.append(el("td", "num", fmt(task.started)));
+        row.append(el("td", "num", fmt(task.finished)));
+
+        row.addEventListener("click", () => toggleRow(row));
+        row.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggleRow(row);
+          }
+        });
+        body.append(row);
+
+        const tr = el("tr", "detail-row");
+        const td = el("td");
+        td.colSpan = 7;
+        tr.append(td);
+        tr.hidden = !expanded.has(key);
+        if (expanded.has(key)) {
+          const version = task.detail_version || "";
+          const cached = detailCache.get(key);
+          if (cached && cached.version === version && cached.data) {
+            fillDetail(tr, key, version);
+          } else {
+            fillDetail(tr, key, version);
+            fetchDetail(key, version, false);
+          }
+        }
+        body.append(tr);
+      }
+      table.append(head, body);
+      wrap.append(table);
+      return wrap;
+    }
+
+    function storeSection(store) {
+      const section = el("section", "panel");
+      const title = el("div", "section-title");
+      const left = el("div");
+      left.append(el("p", "eyebrow", store.key));
+      left.append(el("h2", null, store.label || store.key));
+      title.append(left);
+      title.append(el("span", "muted", (store.tasks.length || 0) + " 个任务"));
+      section.append(title);
+      section.append(el("p", "hint", store.path));
+      if (store.error) section.append(el("p", "error-text", "store 读取问题：" + store.error));
+      if (!store.tasks.length) section.append(el("p", "hint", "该 store 下没有任务。"));
+      else section.append(taskTable(store));
+      return section;
+    }
+
+    function render(data) {
+      const stores = Array.isArray(data.stores) ? data.stores : [];
+      // 重绘前记录当前任务焦点与滚动位置，重绘后原样恢复。
+      const active = document.activeElement;
+      const focusKey = active && active.classList && active.classList.contains("task-row") ? keyOf(active) : null;
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+
+      let total = 0;
+      let failed = 0;
+      const counts = new Map();
+      for (const store of stores) {
+        if (store.error) failed += 1;
+        const tasks = Array.isArray(store.tasks) ? store.tasks : [];
+        total += tasks.length;
+        for (const task of tasks) {
+          const key = task.status || "未知";
+          counts.set(key, (counts.get(key) || 0) + 1);
+        }
+      }
+      $("#stat-stores").textContent = stores.length;
+      $("#stat-tasks").textContent = total;
+      $("#stat-errors").textContent = failed;
+      $("#stats").hidden = false;
+
+      // 说明只反映已注册范围；计数全部取自本次响应，不硬编码。
+      const scope = $("#scope");
+      if (scope) {
+        scope.textContent = "已注册范围（" + stores.length + " 个 store）：" +
+          (stores.map((store) => store.key).join(" · ") || "无");
+      }
+
+      const chips = $("#stat-statuses");
+      clear(chips);
+      const ordered = [...counts.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])));
+      if (!ordered.length) chips.append(el("span", "chip", "暂无任务"));
+      for (const [name, count] of ordered) chips.append(el("span", statusClass(name), name + " " + count));
+
+      const host = $("#stores");
+      clear(host);
+      for (const store of stores) host.append(storeSection(store));
+
+      if (focusKey) {
+        const row = findRow(focusKey);
+        if (row) row.focus();
+      }
+      window.scrollTo(0, scrollY);
+    }
+
+    async function load(manual) {
+      if (busy) return;
+      busy = true;
+      const status = $("#status");
+      if (manual) status.textContent = "正在刷新…";
+      try {
+        const response = await fetch("/api/tasks", { cache: "no-store" });
+        const body = await response.json();
+        if (!response.ok) throw new Error((body && body.error) || ("HTTP " + response.status));
+        // 只在任务真实内容变化时重绘；updated_at 变化不算。未变只更新时间戳。
+        const signature = contentSignature(body);
+        if (manual || signature !== lastContent) {
+          lastContent = signature;
+          if (manual) retryFailedDetails();
+          render(body);
+        }
+        const total = (body.stores || []).reduce((sum, store) => sum + (store.tasks || []).length, 0);
+        status.className = "biz-status ok";
+        status.textContent = "已读取 " + (body.stores || []).length + " 个 store · " + total + " 个任务 · " + stamp();
+        $("#updated").textContent = "最后更新 " + stamp() + "（每 20 秒自动刷新）";
+      } catch (err) {
+        status.className = "biz-status error";
+        status.textContent = "读取 /api/tasks 失败：" + ((err && err.message) || err) + "（保留上次展示）";
+      } finally {
+        busy = false;
+      }
+    }
+
+    $("#reload").addEventListener("click", () => load(true));
+    load(false);
+    setInterval(() => load(false), REFRESH_MS);
+  </script>
+</body>
+</html>

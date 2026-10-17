@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "M1 manual import request",
+  "description": "Entire UTF-8 JSON request must be <= 1000000 bytes; this transport cap overrides per-field character maxima. Server validation is authoritative.",
+  "type": "object",
+  "required": ["feed_id", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "feed_id": {"type": "integer", "minimum": 1},
+    "records": {
+      "type": "array", "maxItems": 100,
+      "description": "Actual count must also be <= server --limit; first run uses 3.",
+      "items": {
+        "type": "object", "required": ["title", "url"], "additionalProperties": false,
+        "properties": {
+          "title": {"type": "string", "minLength": 1, "maxLength": 10000},
+          "summary": {"type": "string", "maxLength": 100000},
+          "url": {"type": "string", "maxLength": 4000, "pattern": "^[hH][tT][tT][pP][sS]?://"},
+          "source_id": {"type": ["string", "null"], "maxLength": 2000},
+          "published_at": {"type": ["string", "null"]},
+          "raw_xml": {"type": "string", "maxLength": 2000000}
+        }
+      }
+    }
+  }
+}

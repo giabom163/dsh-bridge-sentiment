@@ -1,0 +1,19 @@
+{
+  "_template": "docs-only —— 只改文档/规则（最低风险）",
+  "title": "{{TITLE}}",
+  "opencode_mode": "standalone",
+  "task_id": "{{TASK_ID}}",
+  "goal": "只改 `docs/` 下的文档：{{WHAT}}。**不改任何代码、不执行任何采集或模型调用**。原文照抄给定的内容，不要改写、不要新增我没有说过的承诺。\n\n【交付前必跑自检（离线）】\n`python -B \"{{SELFCHECK}}\" --kind docs --worktree . --allow \"docs/\" --artifacts \"{{ARTIFACTS}}\"`\n必须 `verdict=pass`，把完整 JSON 贴进交付说明。",
+  "repo": "{{REPO}}",
+  "executor": "opencode",
+  "model": "{{MODEL}}",
+  "allowed_paths": ["docs/"],
+  "artifacts": ["{{ARTIFACTS}}"],
+  "input_refs": ["AGENTS.md"],
+  "completion_criteria": [
+    "只改 docs/ 下的文件",
+    "内容与给定原文一致，未新增未说过的承诺",
+    "交付前 selfcheck.py --kind docs 必须 verdict=pass，且完整 JSON 已贴出"
+  ],
+  "timeout_seconds": 300
+}

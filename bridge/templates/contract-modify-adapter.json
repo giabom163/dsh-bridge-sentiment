@@ -1,0 +1,22 @@
+{
+  "_template": "modify-adapter —— 改 HTTP 模型适配器（基于 S3-A rev2/rev3/rev4 的真实教训）",
+  "title": "{{TITLE}}",
+  "opencode_mode": "standalone",
+  "task_id": "{{TASK_ID}}",
+  "goal": "【复用优先】复用仓库里已有的适配器代码（`{{ADAPTER_FILE}}`）与 `analysis.py` 的常量；不要重写一套 HTTP 逻辑。\n\n【本次改动】{{CHANGE_DESCRIPTION}}\n\n【硬性要求（都是实测踩过的坑）】\n1. 请求体的 `model` 必须是**裸 id**（如 `deepseek-v4.1-flash`），**不得**带 `opencode-go/` 之类 provider 前缀——带前缀会被网关 400 `Model is unavailable`；\n2. 请求体必须带 `reasoning_effort: \"none\"`（不带时模型把预算烧在思考上、返回非 JSON）；\n3. 三个必备头：`Authorization: Bearer <环境变量名>`、浏览器风格 `User-Agent`（缺了被 Cloudflare 403 error 1010）、`x-opencode-session`（缺了 400 MissingSessionID）；\n4. 解析只接受单个 JSON 对象；枚举越界降级为保守值，**抛错会污染数据**；\n5. HTTP 失败保留真实状态码与响应体前 200 字；**不自动重试**；不确定语义不放宽；\n6. 凭据只以环境变量**名字**引用，仓库内不得出现任何密钥。\n\n【交付前必跑自检（离线）】\\n`python -B \"{{SELFCHECK}}\" --kind adapter --worktree . --allow \"{{ALLOW}}\" --artifacts \"{{ARTIFACTS}}\"`\\n必须 `verdict=pass`，把完整 JSON 贴进交付说明。\n\n【证据分工（重要）】本任务**没有模型凭据**（也不允许硬编码）。因此：\\n- 你要做：实现 + 离线自检 + 桩/伪造端点验证失败路径（不联网）；\\n- **真实模型调用由主线程在产品侧补跑**，你只需在交付说明里写明「真实调用未做，由主线程补」。\\n不要为了证明能调通去猜密钥或读凭据文件。",
+  "repo": "{{REPO}}",
+  "executor": "opencode",
+  "model": "{{MODEL}}",
+  "allowed_paths": ["{{ADAPTER_FILE}}"],
+  "artifacts": ["{{ADAPTER_FILE}}"],
+  "input_refs": ["{{ADAPTER_FILE}}", "storage.py"],
+  "anchors": ["{{ADAPTER_FILE}}:1"],
+  "completion_criteria": [
+    "只改了 {{ADAPTER_FILE}} 一个文件",
+    "请求体是裸模型 id + reasoning_effort=none + 三个必备头齐",
+    "HTTP 失败保留真实状态码与响应体摘要；不自动重试；枚举越界降级不抛错",
+    "仓库内无密钥（只出现环境变量名）",
+    "交付前 selfcheck.py --kind adapter 必须 verdict=pass，且完整 JSON 已贴出"
+  ],
+  "timeout_seconds": 600
+}

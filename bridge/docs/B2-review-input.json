@@ -1,0 +1,136 @@
+{
+  "action": "按真实格式纠正证据扩展名，字节不变；不删除图片",
+  "renames": [
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\audit-visible.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\audit-visible.jpg",
+      "mime": "image/jpeg",
+      "sha256": "ddcd8944fd8213f68d521822c29e152fa2d2b2e7bd3a68cd2278165ef4b12655"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\b0-visible.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\b0-visible.jpg",
+      "mime": "image/jpeg",
+      "sha256": "b8f9ebe8e573d2e91eaf7f6e3a2c1a216d86133d1fe65e1c7e47a65f9b1a19f1"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\b1-visible.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\b1-visible.jpg",
+      "mime": "image/jpeg",
+      "sha256": "0498dc34fa0a48f27891d925b1fc1d27c09d988f1cdc3a7788979899a6233017"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\fixture-first-failure-before-fix.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\fixture-first-failure-before-fix.jpg",
+      "mime": "image/jpeg",
+      "sha256": "3e4a66baed99e3c885409643bf9735eab38a63082f5a477581010a96b4dd336f"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\r2-visible.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\r2-visible.jpg",
+      "mime": "image/jpeg",
+      "sha256": "4dc2ee8107642a627b829c6a7cb7e7a5d59a82c520c568af8d5e20eba2b7e3de"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-delivery.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-delivery.jpg",
+      "mime": "image/jpeg",
+      "sha256": "594690360567ef1f43787fc2a73bf9e5922dc4f6254ee6546e5c16b29db69357"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-disconnected.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-disconnected.jpg",
+      "mime": "image/jpeg",
+      "sha256": "96facddd3bc09c7a35e6265155ef007990f20858dbb2abd68cfd22f5a63bef5f"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-empty-final.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-empty-final.jpg",
+      "mime": "image/jpeg",
+      "sha256": "9f6e64519acc508ef42314b35edc2e00169b9c82c724f787bb36b7ca1c831941"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-filter-one.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-filter-one.jpg",
+      "mime": "image/jpeg",
+      "sha256": "836a0fa9a92debe719299b4c3a835d9154d1b8b067575a30f62b05f049811930"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-first-failure-final.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-first-failure-final.jpg",
+      "mime": "image/jpeg",
+      "sha256": "7bddbca6e2e69bed1c0a966e0ddd6cf578856a387dab91cd2ce81b215e4e90cd"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-graph-final.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-graph-final.jpg",
+      "mime": "image/jpeg",
+      "sha256": "2468148fe230fb2bfb6571a420a51e0ea31ab81310b7e61cec1475b214c615f3"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-label-fit-failure.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-label-fit-failure.jpg",
+      "mime": "image/jpeg",
+      "sha256": "8d049ff7337a8f49ad07faf15a157df74fd25f0affaa9843169c59f98be6c255"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-node-detail.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-node-detail.jpg",
+      "mime": "image/jpeg",
+      "sha256": "968dde9a7418ffcfd8bd177954c93aa7fc8d05ef01f2194dc54a9ed6832dcf45"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-overlay-failure.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\outputs\\bridge-b1\\evidence\\ui-overlay-failure.jpg",
+      "mime": "image/jpeg",
+      "sha256": "5d7573b23d536db61a21a229bbfe07a8e1bce9e74e1154fafbc9705b223a9bdb"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-disconnected.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-disconnected.jpg",
+      "mime": "image/jpeg",
+      "sha256": "96facddd3bc09c7a35e6265155ef007990f20858dbb2abd68cfd22f5a63bef5f"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-empty-final.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-empty-final.jpg",
+      "mime": "image/jpeg",
+      "sha256": "9f6e64519acc508ef42314b35edc2e00169b9c82c724f787bb36b7ca1c831941"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-filter-one.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-filter-one.jpg",
+      "mime": "image/jpeg",
+      "sha256": "836a0fa9a92debe719299b4c3a835d9154d1b8b067575a30f62b05f049811930"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-first-failure-final.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-first-failure-final.jpg",
+      "mime": "image/jpeg",
+      "sha256": "7bddbca6e2e69bed1c0a966e0ddd6cf578856a387dab91cd2ce81b215e4e90cd"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-graph-final.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-graph-final.jpg",
+      "mime": "image/jpeg",
+      "sha256": "2468148fe230fb2bfb6571a420a51e0ea31ab81310b7e61cec1475b214c615f3"
+    },
+    {
+      "old": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-node-detail.png",
+      "new": "C:\\Users\\Lenovo\\Documents\\Codex\\2026-10-15\\c-users-lenovo-appdata-local-temp\\work\\bridge-b1-source\\docs\\ui-node-detail.jpg",
+      "mime": "image/jpeg",
+      "sha256": "968dde9a7418ffcfd8bd177954c93aa7fc8d05ef01f2194dc54a9ed6832dcf45"
+    }
+  ],
+  "legacy_references": "历史审计原文不改，其.png引用按此映射定位.jpg",
+  "original_checkpoint_sha256": "ac7684729dda157828dadcd2aa32e8d7cb26644d81ac1062e0311c4a9c87e4d0",
+  "original_process_evidence": "B1已含ExecutablePath/CommandLine；缺CreationDate，本轮补齐",
+  "review_findings": {
+    "duplicate_prompt": "确认",
+    "artifact_subset": "bridge.py:144已校验，补语义文案即可",
+    "workspace_argument": "directory实际是任务store目录；必须用attempt.worktree，不能照建议直接打印directory",
+    "status_vs_acceptance": "两套独立字段，不禁止Luna作只读审计PASS",
+    "syntax_check": "仅明确契约授权的小范围检查，不能模板全局放权",
+    "vendor_integrity": "用户独立报告称一致，未收到原始metadata，不能冒充本轮亲测"
+  }
+}

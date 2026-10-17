@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent Bridge · 本地控制台</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/vendor/cytoscape.min.js" defer></script>
+  <script src="/task-graph.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail">
+      <a class="brand" href="/" aria-label="Agent Bridge 首页"><span class="brand-mark">A</span><span>Agent Bridge<small>LOCAL CONTROL</small></span></a>
+      <div class="rail-label">工作区</div>
+      <button class="nav-item active" id="navTasks"><span class="nav-icon">◫</span>任务总览 <span class="nav-count" id="taskCount">0</span></button>
+      <div class="rail-note"><span class="live-dot"></span><div>仅本机可访问<small>127.0.0.1 · 不对局域网开放</small></div></div>
+      <div class="rail-bottom"><span class="mini-mark">AB</span><span>Agent Bridge Demo<small>本地执行 · 人工验收</small></span></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumbs">工作区 <span>/</span> <strong>任务总览</strong></div><div class="top-actions"><span class="connection" id="connectionState"><i></i> 本地连接</span><button class="icon-button" id="refreshButton" title="刷新任务">↻</button><button class="primary-button" id="newTaskButton"><span>＋</span> 新建任务</button></div></header>
+      <section class="intro"><div><div class="eyebrow">执行与审查</div><h1>任务控制台</h1><p>在这里查看桥状态、审阅计划，并按任务逐项批准执行与验收。</p></div><div class="intro-stamp"><b>LOOPBACK</b><span>数据留在本机</span></div></section>
+      <section class="metrics" id="metrics"></section>
+      <section class="graph-panel panel" aria-labelledby="graphHeading">
+        <div class="panel-heading"><div><h2 id="graphHeading">任务协同图</h2><p>节点为真实任务；边仅来自 task.dependencies（当前尝试，非完整历史）</p></div><div class="graph-status" id="graphStatus" role="status" aria-live="polite">正在读取任务…</div></div>
+        <div class="graph-body">
+          <div class="graph-stage">
+            <div class="graph-canvas" id="taskGraph" role="img" aria-label="任务依赖关系图；下方提供等价文本列表"></div>
+            <div class="graph-error" id="graphError" role="alert" hidden></div>
+            <div class="graph-empty" id="graphEmpty" hidden><div class="empty-icon">◫</div><strong>暂无任务</strong><span>创建任务后，这里会按依赖关系绘制节点与边。</span></div>
+          </div>
+          <details class="graph-list-wrap" open><summary>任务文本列表（可访问，与搜索同步过滤）</summary><ul class="graph-list" id="graphList"><li class="graph-list-empty">正在读取任务…</li></ul></details>
+          <div class="graph-note" id="graphNote" role="status"></div>
+        </div>
+      </section>
+      <section class="workspace-grid">
+        <div class="list-panel panel">
+          <div class="panel-heading"><div><h2>任务</h2><p>状态从桥的本地记录读取</p></div><label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="搜索任务"></label></div>
+          <div class="table-wrap"><table><thead><tr><th>任务</th><th>执行器</th><th>状态</th><th>最近更新</th><th></th></tr></thead><tbody id="taskRows"></tbody></table><div class="empty-state" id="emptyState"><div class="empty-icon">◫</div><strong id="emptyTitle">还没有任务</strong><span id="emptyHint">创建任务契约后，可在这里规划、执行和审查。</span><button class="text-button" id="emptyNewButton">创建第一个任务 <span>→</span></button></div></div>
+        </div>
+        <aside class="detail-panel panel" id="detailPanel"><div class="detail-placeholder"><div class="placeholder-art"><i></i><i></i><i></i></div><strong>选择一个任务</strong><span>计划、执行结果和审查记录会显示在这里。</span></div></aside>
+      </section>
+      <footer class="footer"><span id="runtimeInfo">正在读取实际加载版本…</span><span>执行前逐项批准 · 结果由人审查</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="taskDialog" class="modal"><form method="dialog" class="modal-card"><div class="modal-top"><div><div class="eyebrow">任务契约</div><h2 id="taskDialogTitle">新建任务</h2></div><button class="icon-button close-button" value="cancel" aria-label="关闭">×</button></div><p class="modal-copy">输入 JSON 契约。提交只会保存任务并校验契约，不会启动执行器。</p><textarea id="contractInput" class="code-input" spellcheck="false" aria-label="任务契约 JSON"></textarea><div class="modal-error" id="taskDialogError"></div><div class="modal-actions"><button class="secondary-button" value="cancel">取消</button><button class="primary-button" id="saveTaskButton" type="button">保存任务契约</button></div></form></dialog>
+  <dialog id="actionDialog" class="modal"><form method="dialog" class="modal-card"><div class="modal-top"><div><div class="eyebrow" id="actionEyebrow">执行确认</div><h2 id="actionTitle">批准操作</h2></div><button class="icon-button close-button" value="cancel" aria-label="关闭">×</button></div><div class="action-content" id="actionContent"></div><div class="modal-error" id="actionError"></div><div class="modal-actions"><button class="secondary-button" value="cancel">返回</button><button class="danger-button" id="confirmActionButton" type="button">确认操作</button></div></form></dialog>
+</body>
+</html>

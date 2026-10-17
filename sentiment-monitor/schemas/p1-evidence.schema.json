@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "P1 manual gender-topic evidence import request",
+  "description": "POST /api/p1/import 请求体，仅 {records:[...]}。整个 UTF-8 JSON 请求 <= 1000000 字节，优先于各字段上限。实际条数还必须 <= min(服务 --limit, 3)，且全库 P1 候选身份总数 <= 3。服务端校验为准，本 schema 与 schemas/import.schema.json 相互隔离。禁止任何评论/回复正文及未声明字段。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["records"],
+  "properties": {
+    "records": {
+      "type": "array", "maxItems": 3,
+      "description": "人工提供的候选证据；实际条数还必须 <= min(服务 --limit, 3)。不自动按相似标题合并事件；group_label 为人工指定。",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["platform", "url", "title", "source_name", "evidence_kind", "content", "observed_at", "source_response_sha256", "comment_count"],
+        "properties": {
+          "platform": {"type": "string", "minLength": 1, "maxLength": 100, "description": "来源平台标识，如 bilibili"},
+          "platform_id": {"type": ["string", "null"], "maxLength": 2000, "description": "平台内 ID；为空则身份回退到规范 URL"},
+          "url": {"type": "string", "maxLength": 4000, "pattern": "^[hH][tT][tT][pP][sS]?://"},
+          "title": {"type": "string", "minLength": 1, "maxLength": 10000},
+          "source_name": {"type": "string", "minLength": 1, "maxLength": 200},
+          "evidence_kind": {"enum": ["title_only", "post_body", "source_summary"]},
+          "content": {"type": "string", "maxLength": 100000, "description": "帖主正文或明确来源摘要；title_only 必须为空字符串，其余必须非空。禁止评论/回复正文。"},
+          "observed_at": {"type": "string", "description": "必须为带时区的有效时间；导入时间由服务另行保存"},
+          "published_at": {"type": ["string", "null"]},
+          "source_response_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "输入提供的源响应 hash；本服务不核验源响应字节，与本地 snapshot_sha256 不同"},
+          "comment_count": {"$ref": "#/$defs/count", "description": "评论计数，不与 view/like/danmaku 混用"},
+          "other_counts": {
+            "type": "object", "maxProperties": 20,
+            "description": "view/like/danmaku 等分别命名，不得包含评论/回复计数",
+            "additionalProperties": {"$ref": "#/$defs/count"}
+          },
+          "group_label": {"type": ["string", "null"], "maxLength": 200, "description": "人工候选分组；缺省为“人工候选”，禁止自动从相似标题合并事件"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "count": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "precision", "source_field"],
+      "properties": {
+        "value": {"type": ["integer", "null"], "minimum": 0, "description": "未知必须为 null，不得转成 0；拒绝 bool 与负数"},
+        "precision": {"enum": ["exact", "approximate", "unknown"]},
+        "source_field": {"type": "string", "minLength": 1, "maxLength": 200}
+      }
+    }
+  }
+}

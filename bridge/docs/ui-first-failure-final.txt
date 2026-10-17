@@ -1,0 +1,76 @@
+Browser tab: 3, Title: "Agent Bridge · 本地控制台", URL: "http://127.0.0.1:8766/".
+1 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8766/
+	2 text ⚠ 样本夹具（api-fail）：真实 UI + 固定 /api/tasks；由 tests/graph_checks.py --serve-ui-fixture 提供；独立临时 store，非真实 store，无模型请求、无外部访问。
+	3 container
+		4 link Description: Agent Bridge 首页, Value: 127.0.0.1:8766/
+		5 text 工作区
+		6 button ◫ 任务总览 —, ID: navTasks
+			7 text ◫
+			8 text 任务总览
+			73 text —
+		10 text 仅本机可访问 127.0.0.1 · 不对局域网开放 AB Agent Bridge Demo 本地执行 · 人工验收
+	11 container
+		12 container
+			13 text 工作区  / 任务总览
+		74 text 已断连 · 最后成功 尚未成功
+		15 button ↻, Help: 刷新任务, ID: refreshButton
+		16 button ＋ 新建任务, ID: newTaskButton
+			17 text ＋
+			18 text 新建任务
+		19 text 执行与审查
+		20 heading 任务控制台, Value: 1
+			21 text 任务控制台
+		22 text 在这里查看桥状态、审阅计划，并按任务逐项批准执行与验收。
+		23 text LOOPBACK
+		24 text 数据留在本机
+		25 container metrics
+			75 container
+				76 text 任务总数 ◫ — 尚未成功读取
+			77 container
+				78 text 正在执行 ↗ — 尚未成功读取
+			79 container
+				80 text 等待审查 ◇ — 尚未成功读取
+			81 container
+				82 text 验收阻塞 ! — 尚未成功读取
+		34 container 任务协同图
+			35 heading 任务协同图, Value: 2, ID: graphHeading
+				36 text 任务协同图
+			37 text 节点为真实任务；边仅来自 task.dependencies（当前尝试，非完整历史）
+			83 text 已断连 · 最后成功刷新 尚未成功
+			39 container
+				40 container Description: 任务依赖关系图；下方提供等价文本列表, ID: taskGraph
+				84 text 尚未成功读取任务列表；无法确认任务是否为空。请等待重试或检查本机连接。
+			42 container
+				43 button (expanded) 任务文本列表（可访问，与搜索同步过滤）, Secondary Actions: Collapse
+					44 text 任务文本列表（可访问，与搜索同步过滤）
+				45 content list graphList
+					85 text 无法读取任务（尚未成功加载）；不能判定为空。
+			86 text 来源：GET /api/tasks（每条为当前尝试，非完整历史）
+		48 heading 任务, Value: 2
+			49 text 任务
+		50 text 状态从桥的本地记录读取
+		51 container
+			52 text ⌕
+			53 search text field (settable) ⌕, ID: searchInput
+		54 table
+			55 row
+				56 cell
+					57 text 任务
+				58 cell
+					59 text 执行器
+				60 cell
+					61 text 状态
+				62 cell
+					63 text 最近更新
+		64 container emptyState
+			65 text ◫
+			87 text 无法读取任务
+			88 text 尚未成功加载任务列表；无法确认任务是否为空。请等待重试或检查本机连接。
+		68 container detailPanel
+			69 text 选择一个任务
+			70 text 计划、执行结果和审查记录会显示在这里。
+		71 text shared-session-graph-20261015 · PID 11828 · bridge 94f03496f858
+		72 text 执行前逐项批准 · 结果由人审查
+	89 text fixture api-fail: /api/tasks 固定 503（样本，不访问真实 store）
+
+The focused UI element is 1 AXWebArea Agent Bridge · 本地控制台, URL: 127.0.0.1:8766/

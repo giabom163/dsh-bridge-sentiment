@@ -1,0 +1,56 @@
+{
+  "scope": "B1 桥协同图有限真实路径验收，非完整Demo或全部桥功能",
+  "machine": "watchdog-final.json",
+  "observations": {
+    "real_graph": {
+      "tasks": 11,
+      "canvas": 3,
+      "empty_display": "none",
+      "screenshot": "ui-graph-final.png"
+    },
+    "filter": {
+      "query": "bridge-b1-flash-20261015",
+      "graph_and_table": 1,
+      "screenshot": "ui-filter-one.png"
+    },
+    "node_click": {
+      "clicked_actual_canvas": true,
+      "detail_task": "bridge-b1-flash-20261015",
+      "full_goal_retained": true,
+      "evidence": "ui-node-detail.txt"
+    },
+    "first_failure": {
+      "fixture": true,
+      "actual_http": 503,
+      "ui": "尚未成功读取/无法确认是否为空",
+      "empty_visible": false,
+      "evidence": "ui-first-failure-final.txt"
+    },
+    "empty_success": {
+      "fixture": true,
+      "actual_http": 200,
+      "ui": "暂无任务/还没有任务",
+      "evidence": "ui-empty-final.txt"
+    },
+    "disconnect": {
+      "actual_verified_project_process_stopped": 43368,
+      "tasks_retained": 11,
+      "old_time": "2026/10/15 21:31:15",
+      "ui": "已断连",
+      "evidence": "ui-disconnected.txt"
+    },
+    "restore": {
+      "pid": 23508,
+      "connected": true,
+      "evidence": "ui-restored.txt"
+    },
+    "browser_errors_after_final_reload": []
+  },
+  "limitations": [
+    "生产记录仅awaiting_review/awaiting_user与BLOCKED，不宣称十状态都在真实store触发",
+    "真实store无dependencies，未虚构关系；边/缺依赖仍只有定向辅助检查",
+    "未覆盖窄屏、取消、历史回放、完整任务生命周期",
+    "npm dist.integrity未留存，只有官方来源记录与本地hash",
+    "未执行bridge人工accept，任务继续待审查"
+  ]
+}
